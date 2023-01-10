@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "177725354636",
+    "project_id": "moshahda",
+    "storage_bucket": "moshahda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177725354636:android:8620885a3a42fa155a81a9",
+        "android_client_info": {
+          "package_name": "com.example.moshahda_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177725354636-041ahlfn30dbre75d5cul4avb705fj32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4sltqzJv5NapZncacDR2LxOuQ5poNQzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177725354636-041ahlfn30dbre75d5cul4avb705fj32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,9 @@ class Favorite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Favorite");
+    return const Text(
+      "Favorite",
+      style: TextStyle(color: Colors.white, fontSize: 48),
+    );
   }
 }

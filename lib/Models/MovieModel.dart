@@ -22,7 +22,6 @@ class MovieModel {
 
   MovieModel.fromJson(Map<String, dynamic> Json) {
     link = Json['link'];
-
     name = Json['name'];
     img = Json['img'];
     description = Json['description'];

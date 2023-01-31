@@ -12,12 +12,17 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(BuildContext context) => BlocProvider.of(context);
   TextEditingController searchController = TextEditingController();
 
-  int currentPage = 0;
+  int currentPage = 0, focusedIndex = 1;
 
   List<Widget> screens = [Home(), Favorite(), Movies(), Series()];
 
   void changePage(int index) {
     currentPage = index;
     emit(ChangePageSuccessState());
+  }
+
+  void onItemFocuss(int index) {
+    focusedIndex = index;
+    emit(state);
   }
 }

@@ -1,5 +1,5 @@
 // ignore_for_file: sized_box_for_whitespace
-
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,47 +87,6 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           if (cupit.screens[cupit.currentPage] is Home)
-                            Align(
-                              alignment: Alignment.center,
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    height: 100,
-                                    width: 80,
-                                    child: movieCard(),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    height: 160,
-                                    width: 142,
-                                    child: movieCard(),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    height: 100,
-                                    width: 80,
-                                    child: movieCard(),
-                                  )
-                                ],
-                              ),
-                            ),
-                          if (cupit.screens[cupit.currentPage] is Home)
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Icon(
-                                FontAwesomeIcons.ellipsis,
-                                size: 50,
-                                //  color: Colors.grey.withOpacity(1),
-                              ),
-                            ),
-                          if (cupit.screens[cupit.currentPage] is Home)
                             Container(
                                 height: 400,
                                 decoration: BoxDecoration(
@@ -140,6 +99,30 @@ class HomePage extends StatelessWidget {
                                     ],
                                         end: Alignment.topCenter,
                                         begin: Alignment.bottomCenter))),
+                          if (cupit.screens[cupit.currentPage] is Home)
+                            Align(
+                                alignment: Alignment.center,
+                                child: SizedBox(
+                                  height: 160,
+                                  child: ScrollSnapList(
+                                    itemBuilder: ((context, index) =>
+                                        movieCard()),
+                                    itemCount: 10,
+                                    itemSize: 150,
+                                    onItemFocus: cupit.onItemFocuss,
+                                    dynamicItemSize: true,
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                )),
+                          if (cupit.screens[cupit.currentPage] is Home)
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Icon(
+                                FontAwesomeIcons.ellipsis,
+                                size: 50,
+                                //  color: Colors.grey.withOpacity(1),
+                              ),
+                            ),
                         ],
                       ),
                     ),

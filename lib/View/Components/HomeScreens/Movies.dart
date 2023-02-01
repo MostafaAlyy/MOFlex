@@ -5,6 +5,13 @@ class Movies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Movies");
+    return Container(
+      width: double.infinity,
+      height: 800,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular(18),
+      ),
+    );
   }
 }

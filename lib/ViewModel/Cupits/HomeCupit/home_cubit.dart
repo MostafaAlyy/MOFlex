@@ -12,7 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(BuildContext context) => BlocProvider.of(context);
   TextEditingController searchController = TextEditingController();
 
-  int currentPage = 0, focusedIndex = 1;
+  int currentPage = 0, focusedIndex = 0;
 
   List<Widget> screens = [Home(), Favorite(), Movies(), Series()];
 
@@ -23,6 +23,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   void onItemFocuss(int index) {
     focusedIndex = index;
-    emit(state);
+    emit(ChangeOnFocusInHomeSliderSuccessState());
   }
 }

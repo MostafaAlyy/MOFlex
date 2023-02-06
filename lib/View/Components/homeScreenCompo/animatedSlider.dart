@@ -11,8 +11,11 @@ Widget animatedSlider(var cupit) => Align(
     child: SizedBox(
       height: 160,
       child: ScrollSnapList(
-        itemBuilder: ((context, index) => movieCard()),
-        itemCount: 10,
+        itemBuilder: ((context, index) => movieCard(
+            context: context,
+            imgLink: cupit.moviesList[index].img!,
+            model: cupit.moviesList[index])),
+        itemCount: cupit.moviesList.length,
         itemSize: 150,
         onItemFocus: cupit.onItemFocuss,
         dynamicItemSize: true,

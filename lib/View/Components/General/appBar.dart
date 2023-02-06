@@ -29,12 +29,21 @@ Widget mAppBar(var cupit) => Column(
                     Text(
                       "Moshahda",
                       style: GoogleFonts.prostoOne(
-                          color: Colors.white, fontSize: 20),
+                        color: Colors.white,
+                        fontSize: 20,
+                        shadows: const [
+                          Shadow(
+                            blurRadius: 20.0,
+                            color: Colors.black,
+                            offset: Offset(6.0, 6.0),
+                          ),
+                        ],
+                      ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.notifications_none,
                           color: Colors.white,
                           size: 35,

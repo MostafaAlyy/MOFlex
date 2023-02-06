@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moshahda_app/View/Components/General/MovieCard.dart';
+import 'package:moshahda_app/ViewModel/Cupits/HomeCupit/home_cubit.dart';
 
 class Home extends StatelessWidget {
   const Home({
@@ -9,6 +11,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cupit = HomeCubit.get(context);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -30,11 +33,14 @@ class Home extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: ((context, index) => movieCard()),
+                    itemBuilder: ((context, index) => movieCard(
+                        context: context,
+                        imgLink: cupit.moviesList[index].img!,
+                        model: cupit.moviesList[index])),
                     separatorBuilder: ((context, index) => const SizedBox(
                           width: 10,
                         )),
-                    itemCount: 10),
+                    itemCount: cupit.moviesList.length),
               ),
               const SizedBox(
                 height: 20,
@@ -50,13 +56,15 @@ class Home extends StatelessWidget {
                 height: 160,
                 child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: ((context, index) => movieCard()),
+                    itemBuilder: ((context, index) => movieCard(
+                        context: context,
+                        imgLink: cupit.moviesList[index].img!,
+                        model: cupit.moviesList[index])),
                     separatorBuilder: ((context, index) => const SizedBox(
                           width: 10,
                         )),
-                    itemCount: 10),
+                    itemCount: cupit.moviesList.length),
               ),
               const SizedBox(
                 height: 20,
@@ -74,11 +82,14 @@ class Home extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: ((context, index) => movieCard()),
+                    itemBuilder: ((context, index) => movieCard(
+                        context: context,
+                        imgLink: cupit.moviesList[index].img!,
+                        model: cupit.moviesList[index])),
                     separatorBuilder: ((context, index) => const SizedBox(
                           width: 10,
                         )),
-                    itemCount: 10),
+                    itemCount: cupit.moviesList.length),
               ),
               const SizedBox(
                 height: 20,
@@ -96,11 +107,14 @@ class Home extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: ((context, index) => movieCard()),
+                    itemBuilder: ((context, index) => movieCard(
+                        context: context,
+                        imgLink: cupit.moviesList[index].img!,
+                        model: cupit.moviesList[index])),
                     separatorBuilder: ((context, index) => const SizedBox(
                           width: 10,
                         )),
-                    itemCount: 10),
+                    itemCount: cupit.moviesList.length),
               )
             ]),
       ),

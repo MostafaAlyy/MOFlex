@@ -8,3 +8,15 @@ class HomeInitial extends HomeState {}
 class ChangePageSuccessState extends HomeState {}
 
 class ChangeOnFocusInHomeSliderSuccessState extends HomeState {}
+
+//upload movies state
+class UploadMoviesSuccessState extends HomeState {}
+
+class UploadMoviesErrorState extends HomeState {}
+
+//Get movies state
+class GetMoviesSuccessState extends HomeState {}
+
+class GetMoviesErrorState extends HomeState {}
+
+class GetMoviesLoadingState extends HomeState {}

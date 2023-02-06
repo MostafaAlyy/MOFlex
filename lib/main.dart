@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:moshahda_app/View/Pages/GetStarted.dart';
 import 'View/Pages/HomePage.dart';
+import 'View/Pages/uploadScr.dart';
 import 'ViewModel/Database/local/sharedPreferns.dart';
 import 'firebase_options.dart';
-
 import 'View/Pages/SplachScr.dart';
 
 void main() async {
@@ -17,9 +17,10 @@ void main() async {
   Widget? widget;
 
   if (uId != null) {
-    widget = HomePage();
-  } else
-    widget = GetStart();
+    widget = const HomePage();
+  } else {
+    widget = const GetStart();
+  }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

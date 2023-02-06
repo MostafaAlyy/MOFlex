@@ -3,19 +3,18 @@ import '../General/appBar.dart';
 import 'homeDotsIndicator.dart';
 import './animatedSlider.dart';
 
-Widget homeBanner(var cupit) => Container(
+Widget homeBanner(var cupit) => SizedBox(
       height: 400,
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             height: 400,
             width: double.infinity,
             child: Image.network(
-              'https://cima4uu.autos/wp-content/uploads/075-3486.jpg',
+              cupit.moviesList[cupit.focusedIndex].img,
               fit: BoxFit.fill,
             ),
           ),
-          mAppBar(cupit),
           Container(
               height: 400,
               decoration: BoxDecoration(
@@ -25,6 +24,7 @@ Widget homeBanner(var cupit) => Container(
               ], end: Alignment.topCenter, begin: Alignment.bottomCenter))),
           animatedSlider(cupit),
           homeDotsIndicator(cupit),
+          mAppBar(cupit),
         ],
       ),
     );

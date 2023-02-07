@@ -69,32 +69,27 @@ class GetStart extends StatelessWidget {
           return Scaffold(
               body: Stack(
             children: [
-              Container(
+              SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Image.asset(
-                'assets/GetStartedBackrgound.jpeg',
-                width: 400,
-                fit: BoxFit.fill,
-              )),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 700,
-                    ),
-                    defultGrediantButton(
-                        text: "Get Started",
-                        ontab: (() => signInDialog(
-                              cupit: cupit,
-                              context: context,
-                              emailController: cupit.emailController,
-                              passController: cupit.passwordController,
-                              confirmPasswordController:
-                                  cupit.confirmPasswordController,
-                              NameController: cupit.NameController,
-                            )))
-                  ],
-                ),
+                    'assets/GetStartedBackrgound.jpeg',
+                    fit: BoxFit.fill,
+                  )),
+              Positioned(
+                bottom: 50,
+                left: 22,
+                child: defultGrediantButton(
+                    text: "Get Started",
+                    ontab: (() => signInDialog(
+                          cupit: cupit,
+                          context: context,
+                          emailController: cupit.emailController,
+                          passController: cupit.passwordController,
+                          confirmPasswordController:
+                              cupit.confirmPasswordController,
+                          NameController: cupit.NameController,
+                        ))),
               )
             ],
           ));

@@ -15,7 +15,8 @@ Widget animatedSlider(var cupit) => Align(
             context: context,
             imgLink: cupit.moviesList[index].img!,
             model: cupit.moviesList[index])),
-        itemCount: cupit.moviesList.length,
+        itemCount:
+            (cupit.moviesList.length >= 10) ? 10 : cupit.moviesList.length,
         itemSize: 150,
         onItemFocus: cupit.onItemFocuss,
         dynamicItemSize: true,

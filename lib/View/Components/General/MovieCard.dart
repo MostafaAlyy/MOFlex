@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moshahda_app/Models/MovieModel.dart';
 import 'package:moshahda_app/View/Pages/MovieDetailedScr.dart';
@@ -22,11 +23,11 @@ Widget movieCard(
         clipBehavior: Clip.hardEdge,
         height: 160,
         width: 142,
-        child: Image(
-          image: NetworkImage(
-            imgLink,
-          ),
+        child: CachedNetworkImage(
+          imageUrl: imgLink,
           fit: BoxFit.fill,
+          placeholder: (context, url) => CircularProgressIndicator(),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ));
 }

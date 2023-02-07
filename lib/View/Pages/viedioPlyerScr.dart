@@ -9,14 +9,16 @@ class VideoPlayerScr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: RotatedBox(
-          quarterTurns: 1,
-          child: WebView(
-            initialUrl: videoUrl,
-            navigationDelegate: (navigation) => NavigationDecision.prevent,
-            javascriptMode:
-                JavascriptMode.values.reduce((value, element) => element),
+      body: SafeArea(
+        child: Center(
+          child: RotatedBox(
+            quarterTurns: 1,
+            child: WebView(
+              initialUrl: videoUrl,
+              navigationDelegate: (navigation) => NavigationDecision.prevent,
+              javascriptMode:
+                  JavascriptMode.values.reduce((value, element) => element),
+            ),
           ),
         ),
       ),

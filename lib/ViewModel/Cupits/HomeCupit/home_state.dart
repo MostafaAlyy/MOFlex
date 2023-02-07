@@ -20,3 +20,10 @@ class GetMoviesSuccessState extends HomeState {}
 class GetMoviesErrorState extends HomeState {}
 
 class GetMoviesLoadingState extends HomeState {}
+
+//load more cards on screen states
+class LoadMoreCardsMoviesSuccessState extends HomeState {}
+
+class LoadMoreCardsSeriesSuccessState extends HomeState {}
+
+class LoadMoreCardsFavoriteSuccessState extends HomeState {}

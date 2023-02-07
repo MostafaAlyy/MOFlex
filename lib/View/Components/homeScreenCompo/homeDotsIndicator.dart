@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 Widget homeDotsIndicator(var cupit) => Align(
     alignment: Alignment.bottomCenter,
     child: DotsIndicator(
-      dotsCount: 10,
+      dotsCount: (cupit.moviesList.length >= 10) ? 10 : cupit.moviesList.length,
       position: cupit.focusedIndex.toDouble(),
       decorator: DotsDecorator(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),

@@ -28,7 +28,7 @@ class MovieDetailedScr extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    height: 495,
+                    height: 500,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             colors: [
@@ -108,9 +108,9 @@ class MovieDetailedScr extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const Text(
-                          "Date: 2022/14/12 ",
-                          style: TextStyle(
+                        Text(
+                          "Date: ${movie.dateTime} ",
+                          style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),

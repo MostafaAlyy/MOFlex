@@ -31,8 +31,9 @@ class UploadScr extends StatelessWidget {
                     style: TextStyle(color: Colors.deepOrange, fontSize: 30),
                   ),
                   onPressed: () {
-                    cupit.getEnglishMovies();
+                    // cupit.getEnglishMovies();
                     //cupit.addToMovieList();
+                    cupit.uploadMoviesMap();
                   },
                 ),
               ));

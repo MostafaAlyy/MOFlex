@@ -3,10 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moshahda_app/Models/MovieModel.dart';
 import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
-import 'package:transition/transition.dart';
-
-import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
-import '../Components/General/ViedioPlayerView.dart';
 
 class MovieDetailedScr extends StatelessWidget {
   MovieModel movie;

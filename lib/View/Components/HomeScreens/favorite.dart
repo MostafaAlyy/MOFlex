@@ -157,12 +157,41 @@ class Favorite extends StatelessWidget {
                                           .favoriteSeries[HomeCubit
                                               .favoriteSeriesNames[index]]!
                                           .img!,
-                                      model: cupit.englishSeriesList
-                                          .firstWhere((element) {
-                                        return element.name ==
-                                            HomeCubit
-                                                .favoriteSeriesNames[index];
-                                      })),
+                                      model: cupit.englishSeriesList.firstWhere(
+                                        (element) {
+                                          return element.name ==
+                                              HomeCubit
+                                                  .favoriteSeriesNames[index];
+                                        },
+                                        orElse: () {
+                                          return cupit.arabicSeriesList
+                                              .firstWhere(
+                                            (element) {
+                                              return element.name ==
+                                                  HomeCubit.favoriteSeriesNames[
+                                                      index];
+                                            },
+                                            orElse: () {
+                                              return cupit.ramadan2022SeriesList
+                                                  .firstWhere((element) {
+                                                return element.name ==
+                                                    HomeCubit
+                                                            .favoriteSeriesNames[
+                                                        index];
+                                              }, orElse: () {
+                                                return cupit
+                                                    .ramadan2023SeriesList
+                                                    .firstWhere((element) {
+                                                  return element.name ==
+                                                      HomeCubit
+                                                              .favoriteSeriesNames[
+                                                          index];
+                                                });
+                                              });
+                                            },
+                                          );
+                                        },
+                                      )),
                                   Text(
                                     HomeCubit
                                         .favoriteSeries[HomeCubit

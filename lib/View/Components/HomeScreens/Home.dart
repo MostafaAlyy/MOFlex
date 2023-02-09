@@ -175,6 +175,102 @@ class Home extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
+                    Row(
+                      children: [
+                        Text(
+                          "Arabic Series",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white, fontSize: 20),
+                        ),
+                        const Spacer(),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  Transition(
+                                      child: ShowAllSeries(
+                                          cupit.arabicSeriesList,
+                                          "Arabic Series",
+                                          cupit),
+                                      transitionEffect:
+                                          TransitionEffect.SCALE));
+                            },
+                            child: const Text(
+                              "Show All ",
+                              style: TextStyle(fontSize: 16),
+                            ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      height: 160,
+                      child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: ((context, index) => seriesCard(
+                              context: context,
+                              imgLink: cupit.arabicSeriesList[index].img!,
+                              model: cupit.arabicSeriesList[index])),
+                          separatorBuilder: ((context, index) => const SizedBox(
+                                width: 10,
+                              )),
+                          itemCount: (cupit.arabicSeriesList.length >= 10)
+                              ? 10
+                              : cupit.arabicSeriesList.length),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Ramadan 2022",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white, fontSize: 20),
+                        ),
+                        const Spacer(),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  Transition(
+                                      child: ShowAllSeries(
+                                          cupit.ramadan2022SeriesList,
+                                          "Ramadan 2022",
+                                          cupit),
+                                      transitionEffect:
+                                          TransitionEffect.SCALE));
+                            },
+                            child: const Text(
+                              "Show All ",
+                              style: TextStyle(fontSize: 16),
+                            ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      height: 160,
+                      child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: ((context, index) => seriesCard(
+                              context: context,
+                              imgLink: cupit.ramadan2022SeriesList[index].img!,
+                              model: cupit.ramadan2022SeriesList[index])),
+                          separatorBuilder: ((context, index) => const SizedBox(
+                                width: 10,
+                              )),
+                          itemCount: (cupit.ramadan2022SeriesList.length >= 10)
+                              ? 10
+                              : cupit.ramadan2022SeriesList.length),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),

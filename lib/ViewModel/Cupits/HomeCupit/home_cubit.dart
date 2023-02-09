@@ -182,11 +182,65 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+  List<SeriesModel> arabicSeriesList = [];
+  getArabicSeries() {
+    FirebaseFirestore.instance
+        .collection('Series')
+        .doc('Arabic Series')
+        .get()
+        .then((value) {
+      value.data()!.forEach((key, value) {
+        arabicSeriesList.add(SeriesModel.fromJson(value));
+      });
+
+      emit(GetMoviesSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(GetMoviesErrorState());
+    });
+  }
+
+  List<SeriesModel> ramadan2022SeriesList = [];
+  getRamadan2022Series() {
+    FirebaseFirestore.instance
+        .collection('Series')
+        .doc('Ramadan 2022')
+        .get()
+        .then((value) {
+      value.data()!.forEach((key, value) {
+        ramadan2022SeriesList.add(SeriesModel.fromJson(value));
+      });
+
+      emit(GetMoviesSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(GetMoviesErrorState());
+    });
+  }
+
+  List<SeriesModel> ramadan2023SeriesList = [];
+  getRamadan2023Series() {
+    FirebaseFirestore.instance
+        .collection('Series')
+        .doc('Ramadan 2023')
+        .get()
+        .then((value) {
+      value.data()!.forEach((key, value) {
+        ramadan2023SeriesList.add(SeriesModel.fromJson(value));
+      });
+
+      emit(GetMoviesSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(GetMoviesErrorState());
+    });
+  }
+
   Map<String, Map<String, dynamic>> seriessMap = {};
   uploadSeriesMap() {
     FirebaseFirestore.instance
         .collection('Series')
-        .doc('English Series')
+        .doc('Ramadan 2022')
         .set(seriessMap)
         .then((value) {
       emit(UploadMoviesSuccessState());

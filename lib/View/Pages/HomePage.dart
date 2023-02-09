@@ -13,6 +13,8 @@ class HomePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit()
         ..getEnglishSeries()
+        ..getRamadan2022Series()
+        ..getArabicSeries()
         ..getEnglishMovies()
         ..getArabicMovies(),
       child: BlocConsumer<HomeCubit, HomeState>(

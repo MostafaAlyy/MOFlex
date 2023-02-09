@@ -27,3 +27,11 @@ class LoadMoreCardsMoviesSuccessState extends HomeState {}
 class LoadMoreCardsSeriesSuccessState extends HomeState {}
 
 class LoadMoreCardsFavoriteSuccessState extends HomeState {}
+
+class GetFavoriteMoviesFromDBSuccessState extends HomeState {}
+
+class GetFavoriteSeriesFromDBSuccessState extends HomeState {}
+
+class MoviesToDBLoadingState extends HomeState {}
+
+class SeriesToDBLoadingState extends HomeState {}

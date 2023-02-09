@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 Widget mAppBar(var cupit) => Column(
       children: [
@@ -42,7 +39,9 @@ Widget mAppBar(var cupit) => Column(
                     ),
                     const Spacer(),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          cupit.getFavoriteMoviesFromDB();
+                        },
                         icon: const Icon(
                           Icons.notifications_none,
                           color: Colors.white,

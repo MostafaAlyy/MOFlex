@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moshahda_app/Models/MovieModel.dart';
+import 'package:moshahda_app/Models/SeriesModel.dart';
 import 'package:moshahda_app/View/Components/General/MovieCard.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
+import '../General/SeriesCard.dart';
 import '../General/appBar.dart';
 
-class ShowAll extends StatefulWidget {
-  List<MovieModel> movies;
+class ShowAllSeries extends StatefulWidget {
+  List<SeriesModel> movies;
   String title;
   var cupit;
-  ShowAll(this.movies, this.title, this.cupit);
+  ShowAllSeries(this.movies, this.title, this.cupit);
   @override
-  State<ShowAll> createState() => _ShowAllState(movies, title);
+  State<ShowAllSeries> createState() => _ShowAllSeriesState(movies, title);
 }
 
-class _ShowAllState extends State<ShowAll> {
-  List<MovieModel> movies;
+class _ShowAllSeriesState extends State<ShowAllSeries> {
+  List<SeriesModel> movies;
   String title;
 
-  _ShowAllState(this.movies, this.title);
+  _ShowAllSeriesState(this.movies, this.title);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -32,7 +34,6 @@ class _ShowAllState extends State<ShowAll> {
         },
         builder: (context, state) {
           var cupit = HomeCubit.get(context);
-
           cupit.showAllController.addListener(
             () {
               if (cupit.showAllController.position.pixels ==
@@ -79,7 +80,7 @@ class _ShowAllState extends State<ShowAll> {
                                   const EdgeInsets.symmetric(horizontal: 4),
                               child: Column(
                                 children: [
-                                  movieCard(
+                                  seriesCard(
                                       context: context,
                                       imgLink: movies[index].img!,
                                       model: movies[index]),

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:moshahda_app/View/Components/General/MovieCard.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
+import '../General/SeriesCard.dart';
 import '../General/appBar.dart';
 
 class Series extends StatefulWidget {
@@ -17,16 +18,18 @@ class _SeriesState extends State<Series> {
   @override
   Widget build(BuildContext context) {
     var cupit = HomeCubit.get(context);
+
     cupit.seriesScrollController.addListener(
       () {
         if (cupit.seriesScrollController.position.pixels ==
             cupit.seriesScrollController.position.maxScrollExtent) {
           setState(() {
-            if (cupit.seriesLoadedCards + 10 <= cupit.moviesList.length) {
+            if (cupit.seriesLoadedCards + 10 <=
+                cupit.englishSeriesList.length) {
               cupit.seriesLoadedCards += 10;
               print("SeriesLoadedCards=${cupit.seriesLoadedCards}");
             } else {
-              cupit.seriesLoadedCards = cupit.moviesList.length;
+              cupit.seriesLoadedCards = cupit.englishSeriesList.length;
               print("SeriesLoadedCards=${cupit.seriesLoadedCards}");
             }
           });
@@ -60,12 +63,12 @@ class _SeriesState extends State<Series> {
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Column(
                         children: [
-                          movieCard(
+                          seriesCard(
                               context: context,
-                              imgLink: cupit.moviesList[index].img!,
-                              model: cupit.moviesList[index]),
+                              imgLink: cupit.englishSeriesList[index].img!,
+                              model: cupit.englishSeriesList[index]),
                           Text(
-                            cupit.moviesList[index].name!,
+                            cupit.englishSeriesList[index].name!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.exo2(

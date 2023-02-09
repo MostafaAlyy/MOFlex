@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moshahda_app/View/Components/General/MovieCard.dart';
+import 'package:moshahda_app/View/Components/General/SeriesCard.dart';
 import 'package:moshahda_app/View/Components/HomeScreens/ShowAllScr.dart';
 import 'package:moshahda_app/ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import 'package:transition/transition.dart';
 
 import '../General/defultSearchBar.dart';
 import '../homeScreenCompo/homeBanner.dart';
+import 'ShowAllSeriesScr.dart';
 
 class Home extends StatelessWidget {
   const Home({
@@ -121,6 +123,54 @@ class Home extends StatelessWidget {
                           itemCount: (cupit.arabicMoviesList.length >= 10)
                               ? 10
                               : cupit.arabicMoviesList.length),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "English Series",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white, fontSize: 20),
+                        ),
+                        const Spacer(),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  Transition(
+                                      child: ShowAllSeries(
+                                          cupit.englishSeriesList,
+                                          "English Series",
+                                          cupit),
+                                      transitionEffect:
+                                          TransitionEffect.SCALE));
+                            },
+                            child: const Text(
+                              "Show All ",
+                              style: TextStyle(fontSize: 16),
+                            ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      height: 160,
+                      child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: ((context, index) => seriesCard(
+                              context: context,
+                              imgLink: cupit.englishSeriesList[index].img!,
+                              model: cupit.englishSeriesList[index])),
+                          separatorBuilder: ((context, index) => const SizedBox(
+                                width: 10,
+                              )),
+                          itemCount: (cupit.englishSeriesList.length >= 10)
+                              ? 10
+                              : cupit.englishSeriesList.length),
                     ),
                     const SizedBox(
                       height: 20,

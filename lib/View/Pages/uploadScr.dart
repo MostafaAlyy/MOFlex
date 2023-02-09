@@ -33,7 +33,7 @@ class UploadScr extends StatelessWidget {
                   onPressed: () {
                     // cupit.getEnglishMovies();
                     //cupit.addToMovieList();
-                    cupit.uploadMoviesMap();
+                    cupit.uploadSeriesMap();
                   },
                 ),
               ));

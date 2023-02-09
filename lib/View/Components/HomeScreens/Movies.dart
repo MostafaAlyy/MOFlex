@@ -17,6 +17,7 @@ class _MoviesState extends State<Movies> {
   @override
   Widget build(BuildContext context) {
     var cupit = HomeCubit.get(context);
+
     cupit.moviesScrollController.addListener(
       () {
         if (cupit.moviesScrollController.position.pixels ==

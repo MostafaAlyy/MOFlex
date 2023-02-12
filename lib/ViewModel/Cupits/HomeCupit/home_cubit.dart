@@ -1,8 +1,10 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
 import 'dart:collection';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moshahda_app/Models/MovieModel.dart';
@@ -120,35 +122,67 @@ class HomeCubit extends Cubit<HomeState> {
   List<MovieModel> arabicMoviesList = [];
 
   getEnglishMovies() {
-    FirebaseFirestore.instance
-        .collection('movies')
-        .doc('English Movies')
-        .get()
-        .then((value) {
-      value.data()!.forEach((key, value) {
-        moviesList.add(MovieModel.fromJson(value));
-      });
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('movies')
+          .doc('English Movies')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          moviesList.add(MovieModel.fromJson(value));
+        });
 
-      emit(GetMoviesSuccessState());
-    }).catchError((onError) {
-      emit(GetMoviesErrorState());
-    });
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        emit(GetMoviesErrorState());
+      });
+    } else {
+      Firestore.instance
+          .collection('movies')
+          .document('English Movies')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          moviesList.add(MovieModel.fromJson(value));
+        });
+
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        emit(GetMoviesErrorState());
+      });
+    }
   }
 
   getArabicMovies() {
-    FirebaseFirestore.instance
-        .collection('movies')
-        .doc('Arabic Movies')
-        .get()
-        .then((value) {
-      value.data()!.forEach((key, value) {
-        arabicMoviesList.add(MovieModel.fromJson(value));
-      });
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('movies')
+          .doc('Arabic Movies')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          arabicMoviesList.add(MovieModel.fromJson(value));
+        });
 
-      emit(GetMoviesSuccessState());
-    }).catchError((onError) {
-      emit(GetMoviesErrorState());
-    });
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        emit(GetMoviesErrorState());
+      });
+    } else {
+      Firestore.instance
+          .collection('movies')
+          .document('Arabic Movies')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          arabicMoviesList.add(MovieModel.fromJson(value));
+        });
+
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        emit(GetMoviesErrorState());
+      });
+    }
   }
 
   Map<String, Map<String, dynamic>> moviesMap = {};
@@ -166,74 +200,142 @@ class HomeCubit extends Cubit<HomeState> {
 
   List<SeriesModel> englishSeriesList = [];
   getEnglishSeries() {
-    FirebaseFirestore.instance
-        .collection('Series')
-        .doc('English Series')
-        .get()
-        .then((value) {
-      value.data()!.forEach((key, value) {
-        englishSeriesList.add(SeriesModel.fromJson(value));
-      });
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('Series')
+          .doc('English Series')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          englishSeriesList.add(SeriesModel.fromJson(value));
+        });
 
-      emit(GetMoviesSuccessState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(GetMoviesErrorState());
-    });
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    } else {
+      Firestore.instance
+          .collection('Series')
+          .document('English Series')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          englishSeriesList.add(SeriesModel.fromJson(value));
+        });
+
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    }
   }
 
   List<SeriesModel> arabicSeriesList = [];
   getArabicSeries() {
-    FirebaseFirestore.instance
-        .collection('Series')
-        .doc('Arabic Series')
-        .get()
-        .then((value) {
-      value.data()!.forEach((key, value) {
-        arabicSeriesList.add(SeriesModel.fromJson(value));
-      });
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('Series')
+          .doc('Arabic Series')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          arabicSeriesList.add(SeriesModel.fromJson(value));
+        });
 
-      emit(GetMoviesSuccessState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(GetMoviesErrorState());
-    });
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    } else {
+      Firestore.instance
+          .collection('Series')
+          .document('Arabic Series')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          arabicSeriesList.add(SeriesModel.fromJson(value));
+        });
+
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    }
   }
 
   List<SeriesModel> ramadan2022SeriesList = [];
   getRamadan2022Series() {
-    FirebaseFirestore.instance
-        .collection('Series')
-        .doc('Ramadan 2022')
-        .get()
-        .then((value) {
-      value.data()!.forEach((key, value) {
-        ramadan2022SeriesList.add(SeriesModel.fromJson(value));
-      });
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('Series')
+          .doc('Ramadan 2022')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          ramadan2022SeriesList.add(SeriesModel.fromJson(value));
+        });
 
-      emit(GetMoviesSuccessState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(GetMoviesErrorState());
-    });
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    } else {
+      Firestore.instance
+          .collection('Series')
+          .document('Ramadan 2022')
+          .get()
+          .then((value) {
+        value.map!.forEach((key, value) {
+          ramadan2022SeriesList.add(SeriesModel.fromJson(value));
+        });
+
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    }
   }
 
   List<SeriesModel> ramadan2023SeriesList = [];
   getRamadan2023Series() {
-    FirebaseFirestore.instance
-        .collection('Series')
-        .doc('Ramadan 2023')
-        .get()
-        .then((value) {
-      value.data()!.forEach((key, value) {
-        ramadan2023SeriesList.add(SeriesModel.fromJson(value));
-      });
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('Series')
+          .doc('Ramadan 2023')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          ramadan2023SeriesList.add(SeriesModel.fromJson(value));
+        });
 
-      emit(GetMoviesSuccessState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(GetMoviesErrorState());
-    });
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    } else {
+      Firestore.instance
+          .collection('Series')
+          .document('Ramadan 2023')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          ramadan2023SeriesList.add(SeriesModel.fromJson(value));
+        });
+
+        emit(GetMoviesSuccessState());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(GetMoviesErrorState());
+      });
+    }
   }
 
   Map<String, Map<String, dynamic>> seriessMap = {};

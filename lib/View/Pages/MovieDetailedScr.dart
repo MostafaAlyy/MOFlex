@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,6 +10,8 @@ import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
 import 'package:moshahda_app/ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import 'package:moshahda_app/ViewModel/Database/local/SQFlightHelper.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'desktopWebView.dart';
 
 class MovieDetailedScr extends StatelessWidget {
   MovieModel movie;
@@ -35,9 +40,13 @@ class MovieDetailedScr extends StatelessWidget {
                       Container(
                         height: 400,
                         width: double.infinity,
-                        child: Image.network(
-                          movie.img!,
+                        child: CachedNetworkImage(
+                          imageUrl: movie.img!,
                           fit: BoxFit.fill,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                       Container(
@@ -95,12 +104,21 @@ class MovieDetailedScr extends StatelessWidget {
                                   size: 30,
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            VideoPlayerScr(movie.link!)),
-                                  );
+                                  if (!Platform.isWindows) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              VideoPlayerScr(movie.link!)),
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DesktopWebView(movie.link!)),
+                                    );
+                                  }
                                 },
                               ),
                             ),

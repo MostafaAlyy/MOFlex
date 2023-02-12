@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moshahda_app/Models/SeriesModel.dart';
+import 'package:moshahda_app/View/Pages/desktopWebView.dart';
 import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
 
 import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
@@ -41,6 +44,10 @@ class SeriesDetailedScr extends StatelessWidget {
                           child: CachedNetworkImage(
                             imageUrl: Series.img!,
                             fit: BoxFit.fill,
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ),
                         Container(
@@ -98,12 +105,23 @@ class SeriesDetailedScr extends StatelessWidget {
                                     size: 30,
                                   ),
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VideoPlayerScr(
-                                              Series.links!["1"]!)),
-                                    );
+                                    if (!Platform.isWindows) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VideoPlayerScr(
+                                                    Series.links!["1"]!)),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DesktopWebView(
+                                                    Series.links!["1"]!)),
+                                      );
+                                    }
                                   },
                                 ),
                               ),

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moshahda_app/Models/SeriesModel.dart';
+import 'package:moshahda_app/View/Pages/desktopWebView.dart';
 
 import '../../Pages/viedioPlyerScr.dart';
 
@@ -23,6 +26,8 @@ Widget SeriesEpisodCard(
             child: CachedNetworkImage(
               imageUrl: Series.img!,
               fit: BoxFit.fill,
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
           const SizedBox(
@@ -60,12 +65,21 @@ Widget SeriesEpisodCard(
                   size: 30,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            VideoPlayerScr(Series.links!["${index + 1}"]!)),
-                  );
+                  if (!Platform.isWindows) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              VideoPlayerScr(Series.links!["${index + 1}"]!)),
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DesktopWebView(Series.links!["${index + 1}"]!)),
+                    );
+                  }
                 },
               ),
             ),

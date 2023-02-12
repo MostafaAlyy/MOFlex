@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moshahda_app/ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../General/appBar.dart';
@@ -23,9 +25,11 @@ class homeBanner extends StatelessWidget {
               SizedBox(
                 height: 400,
                 width: double.infinity,
-                child: Image.network(
-                  cupit.moviesList[cupit.focusedIndex].img,
+                child: CachedNetworkImage(
+                  imageUrl: cupit.moviesList[cupit.focusedIndex].img,
                   fit: BoxFit.fill,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
               Container(

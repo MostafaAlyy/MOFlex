@@ -9,7 +9,10 @@ import 'package:moshahda_app/View/Pages/desktopWebView.dart';
 import '../../Pages/viedioPlyerScr.dart';
 
 Widget SeriesEpisodCard(
-    {required SeriesModel Series, required int index, required var context}) {
+    {required SeriesModel Series,
+    required int index,
+    required var context,
+    required Function onPlay}) {
   return Container(
     decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.3),
@@ -66,12 +69,7 @@ Widget SeriesEpisodCard(
                 ),
                 onPressed: () {
                   if (!Platform.isWindows) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              VideoPlayerScr(Series.links!["${index + 1}"]!)),
-                    );
+                    onPlay.call();
                   } else {
                     Navigator.push(
                       context,

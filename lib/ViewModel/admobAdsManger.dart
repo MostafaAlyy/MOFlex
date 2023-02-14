@@ -46,4 +46,16 @@ class AdsManger {
       throw UnsupportedError('un supported platform');
     }
   }
+
+  static String get interstitialdAdUnit {
+    if (testMood) {
+      return 'ca-app-pub-3940256099942544/1033173712';
+    } else if (Platform.isAndroid) {
+      return "ca-app-pub-8319531544284510/1528355423";
+    } else if (Platform.isIOS) {
+      return "------------------------------";
+    } else {
+      throw UnsupportedError('un supported platform');
+    }
+  }
 }

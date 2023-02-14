@@ -26,6 +26,7 @@ class MovieDetailedScr extends StatefulWidget {
 class _MovieDetailedScrState extends State<MovieDetailedScr> {
   BannerAd? banner;
   RewardedAd? rewardedAd;
+  InterstitialAd? _interstitialAd;
 
   void createBannerAd() {
     banner = BannerAd(
@@ -55,6 +56,8 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
       print('Warning: attempt to show rewarded before loaded.');
       setState(() {
         createRewardedAd();
+        showInterstitialAd();
+        afterReward.call();
       });
       return;
     }
@@ -82,10 +85,53 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
     rewardedAd = null;
   }
 
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdsManger.interstitialdAdUnit,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+
+            _interstitialAd!.setImmersiveMode(true);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+
+            _interstitialAd = null;
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    createInterstitialAd();
     createBannerAd();
     createRewardedAd();
   }
@@ -246,7 +292,7 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                       style:
                           GoogleFonts.roboto(color: Colors.white, fontSize: 18),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

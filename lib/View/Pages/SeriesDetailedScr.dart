@@ -5,16 +5,135 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:moshahda_app/Models/SeriesModel.dart';
 import 'package:moshahda_app/View/Pages/desktopWebView.dart';
 import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
 
 import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
+import '../../ViewModel/admobAdsManger.dart';
 import '../Components/General/SeriesEpisodCard.dart';
 
-class SeriesDetailedScr extends StatelessWidget {
+class SeriesDetailedScr extends StatefulWidget {
   SeriesModel Series;
   SeriesDetailedScr(this.Series);
+
+  @override
+  State<SeriesDetailedScr> createState() => _SeriesDetailedScrState();
+}
+
+class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
+  BannerAd? banner;
+  RewardedAd? rewardedAd;
+  InterstitialAd? _interstitialAd;
+
+  void createBannerAd() {
+    banner = BannerAd(
+        size: AdSize.fullBanner,
+        adUnitId: AdsManger.bannerAdUnit,
+        listener: AdsManger.bannerAdListener,
+        request: const AdRequest())
+      ..load();
+  }
+
+  void createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: AdsManger.rewardedAdUnit,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (ad) => setState(() => rewardedAd = ad),
+            onAdFailedToLoad: (error) => setState(
+                  () {
+                    debugPrint(error.message);
+                    rewardedAd = null;
+                  },
+                )));
+  }
+
+  void showRewardedAd({required Function afterReward}) {
+    if (rewardedAd == null) {
+      print('Warning: attempt to show rewarded before loaded.');
+      setState(() {
+        createRewardedAd();
+        showInterstitialAd();
+        afterReward.call();
+      });
+      return;
+    }
+    rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        afterReward;
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createRewardedAd();
+      },
+    );
+
+    rewardedAd!.setImmersiveMode(true);
+    rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      afterReward.call();
+      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+    });
+    rewardedAd = null;
+  }
+
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdsManger.interstitialdAdUnit,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+
+            _interstitialAd!.setImmersiveMode(true);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+
+            _interstitialAd = null;
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createInterstitialAd();
+    createBannerAd();
+    createRewardedAd();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +161,7 @@ class SeriesDetailedScr extends StatelessWidget {
                           height: 400,
                           width: double.infinity,
                           child: CachedNetworkImage(
-                            imageUrl: Series.img!,
+                            imageUrl: widget.Series.img!,
                             fit: BoxFit.fill,
                             placeholder: (context, url) =>
                                 CircularProgressIndicator(),
@@ -106,20 +225,22 @@ class SeriesDetailedScr extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     if (!Platform.isWindows) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                VideoPlayerScr(
-                                                    Series.links!["1"]!)),
-                                      );
+                                      showRewardedAd(afterReward: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VideoPlayerScr(widget
+                                                      .Series.links!["1"]!)),
+                                        );
+                                      });
                                     } else {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                DesktopWebView(
-                                                    Series.links!["1"]!)),
+                                                DesktopWebView(widget
+                                                    .Series.links!["1"]!)),
                                       );
                                     }
                                   },
@@ -136,14 +257,14 @@ class SeriesDetailedScr extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  Series.name!,
+                                  widget.Series.name!,
                                   style: GoogleFonts.roboto(
                                       color: Colors.white, fontSize: 24),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "Date: ${Series.dateTime} ",
+                                  "Date: ${widget.Series.dateTime} ",
                                   style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 14,
@@ -157,15 +278,28 @@ class SeriesDetailedScr extends StatelessWidget {
                         )
                       ],
                     ),
+                    Container(
+                        height: 100, width: 400, child: AdWidget(ad: banner!)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        height: Series.links!.length * 140,
+                        height: widget.Series.links!.length * 140,
                         child: ListView.separated(
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: Series.links!.length,
+                          itemCount: widget.Series.links!.length,
                           itemBuilder: (context, index) => SeriesEpisodCard(
-                              Series: Series, context: context, index: index),
+                              onPlay: () => showRewardedAd(afterReward: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => VideoPlayerScr(
+                                              widget.Series
+                                                  .links!["${index + 1}"]!)),
+                                    );
+                                  }),
+                              Series: widget.Series,
+                              context: context,
+                              index: index),
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: 20),
                         ),
@@ -177,16 +311,16 @@ class SeriesDetailedScr extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  cupit.FavoriteSeriestoDB(Series);
+                  cupit.FavoriteSeriestoDB(widget.Series);
                 },
                 backgroundColor: Colors.grey.withOpacity(0.2),
                 child: Icon(
                   Icons.favorite,
                   size: 40,
-                  color:
-                      (HomeCubit.favoriteSeries.containsKey('${Series.name}'))
-                          ? Colors.redAccent
-                          : Colors.grey[300]!.withOpacity(0.2),
+                  color: (HomeCubit.favoriteSeries
+                          .containsKey('${widget.Series.name}'))
+                      ? Colors.redAccent
+                      : Colors.grey[300]!.withOpacity(0.2),
                 )),
           );
         },

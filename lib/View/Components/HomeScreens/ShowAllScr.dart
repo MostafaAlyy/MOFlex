@@ -62,7 +62,7 @@ class _ShowAllState extends State<ShowAll> {
                 ),
                 child: Column(
                   children: [
-                    mAppBar(cupit),
+                    mAppBar(cupit, context),
                     Text("${title}",
                         style: GoogleFonts.bitter(
                             color: Colors.white, fontSize: 48)),

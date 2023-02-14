@@ -21,6 +21,48 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
   static HomeCubit get(BuildContext context) => BlocProvider.of(context);
   TextEditingController searchController = TextEditingController();
+  static List<MovieModel> searchListMovies = [];
+  static List<SeriesModel> searchListSeries = [];
+
+  SearchFunctionMovies(String s) async {
+    for (int i = 0; i < moviesList.length; i++) {
+      if (moviesList[i].name!.toUpperCase().contains(s.toUpperCase())) {
+        searchListMovies.add(moviesList[i]);
+        print(moviesList[i].name!.toUpperCase());
+        print(s.toUpperCase());
+      }
+    }
+    for (int i = 0; i < arabicMoviesList.length; i++) {
+      if (arabicMoviesList[i].name!.toUpperCase().contains(s.toUpperCase())) {
+        searchListMovies.add(arabicMoviesList[i]);
+      }
+    }
+    emit(SearchState());
+  }
+
+  SearchFunctionSeries(String s) {
+    for (int i = 0; i < englishSeriesList.length; i++) {
+      if (moviesList[i].name!.toUpperCase().contains(s.toUpperCase())) {
+        searchListSeries.add(englishSeriesList[i]);
+      }
+    }
+    for (int i = 0; i < arabicSeriesList.length; i++) {
+      if (arabicMoviesList[i].name!.contains(s)) {
+        searchListSeries.add(arabicSeriesList[i]);
+      }
+    }
+    for (int i = 0; i < ramadan2022SeriesList.length; i++) {
+      if (arabicMoviesList[i].name!.contains(s)) {
+        searchListSeries.add(ramadan2022SeriesList[i]);
+      }
+    }
+    for (int i = 0; i < ramadan2023SeriesList.length; i++) {
+      if (arabicMoviesList[i].name!.contains(s)) {
+        searchListSeries.add(ramadan2023SeriesList[i]);
+      }
+    }
+    emit(SearchState());
+  }
 
   int currentPage = 0, focusedIndex = 0;
 

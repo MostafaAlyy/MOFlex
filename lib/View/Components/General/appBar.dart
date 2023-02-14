@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moshahda_app/View/Components/General/SearchDialog.dart';
 
-Widget mAppBar(var cupit) => Column(
+Widget mAppBar(var cupit, var context) => Column(
       children: [
         PreferredSize(
             preferredSize: const Size.fromHeight(80.0),
@@ -40,10 +41,10 @@ Widget mAppBar(var cupit) => Column(
                     const Spacer(),
                     IconButton(
                         onPressed: () {
-                          cupit.getFavoriteMoviesFromDB();
+                          searchDialog(context: context, cupit: cupit);
                         },
                         icon: const Icon(
-                          Icons.notifications_none,
+                          Icons.search,
                           color: Colors.white,
                           size: 35,
                         ))

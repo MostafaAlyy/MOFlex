@@ -59,6 +59,7 @@ dependencies:
   desktop_webview_window: ^0.2.0
   sqflite_common_ffi: ^2.2.1+1
   sqflite: ^2.2.4+1
+  anim_search_bar: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -45,7 +45,7 @@ class _MoviesState extends State<Movies> {
         ),
         child: Column(
           children: [
-            mAppBar(cupit),
+            mAppBar(cupit, context),
             Text("Movies",
                 style: GoogleFonts.bitter(color: Colors.white, fontSize: 48)),
             Expanded(

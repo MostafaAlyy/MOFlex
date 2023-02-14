@@ -41,7 +41,7 @@ class homeBanner extends StatelessWidget {
                   ], end: Alignment.topCenter, begin: Alignment.bottomCenter))),
               animatedSlider(cupit),
               homeDotsIndicator(cupit),
-              mAppBar(cupit),
+              mAppBar(cupit, context),
             ],
           ),
         );

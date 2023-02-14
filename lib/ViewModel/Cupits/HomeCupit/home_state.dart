@@ -35,3 +35,5 @@ class GetFavoriteSeriesFromDBSuccessState extends HomeState {}
 class MoviesToDBLoadingState extends HomeState {}
 
 class SeriesToDBLoadingState extends HomeState {}
+
+class SearchState extends HomeState {}

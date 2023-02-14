@@ -48,7 +48,7 @@ class _SeriesState extends State<Series> {
         ),
         child: Column(
           children: [
-            mAppBar(cupit),
+            mAppBar(cupit, context),
             Text("Series",
                 style: GoogleFonts.bitter(color: Colors.white, fontSize: 48)),
             Expanded(

@@ -34,7 +34,7 @@ class Favorite extends StatelessWidget {
             ),
             child: Column(
               children: [
-                mAppBar(cupit),
+                mAppBar(cupit, context),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(

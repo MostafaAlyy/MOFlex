@@ -10,7 +10,7 @@ Widget movieCard(
       onTap: () {
         Navigator.push(
             context,
-            Transition(
+            Transitiont(
                 child: MovieDetailedScr(model),
                 transitionEffect: TransitionEffect.SCALE));
       },

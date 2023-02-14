@@ -13,7 +13,7 @@ Widget seriesCard(
       onTap: () {
         Navigator.push(
             context,
-            Transition(
+            Transitiont(
                 child: SeriesDetailedScr(model),
                 transitionEffect: TransitionEffect.SCALE));
       },

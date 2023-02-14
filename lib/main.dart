@@ -1,9 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors
-
 import 'dart:io';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:moshahda_app/View/Pages/GetStarted.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -17,7 +17,8 @@ const apiKey = "AIzaSyAbKmjqsl6mj5JDYzN4buz3elqw2ff40ew";
 const projectId = "moshahda";
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await CashHelper.init();
 
   String? uId = CashHelper.getData(key: 'uId');

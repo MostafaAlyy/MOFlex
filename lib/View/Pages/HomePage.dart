@@ -10,6 +10,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //   Admob.initialize();
+
     return BlocProvider(
       create: (context) => HomeCubit()
         ..getEnglishSeries()

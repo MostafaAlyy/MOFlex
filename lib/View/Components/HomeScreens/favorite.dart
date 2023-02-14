@@ -41,6 +41,8 @@ class Favorite extends StatelessWidget {
                     height: 100,
                     width: double.infinity,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
                             height: 170,

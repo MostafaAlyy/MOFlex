@@ -68,10 +68,9 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                   ],
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
                                     SizedBox(
                                         height: 40,
                                         width: 120,

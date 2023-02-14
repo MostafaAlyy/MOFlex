@@ -28,8 +28,6 @@ class HomeCubit extends Cubit<HomeState> {
     for (int i = 0; i < moviesList.length; i++) {
       if (moviesList[i].name!.toUpperCase().contains(s.toUpperCase())) {
         searchListMovies.add(moviesList[i]);
-        print(moviesList[i].name!.toUpperCase());
-        print(s.toUpperCase());
       }
     }
     for (int i = 0; i < arabicMoviesList.length; i++) {

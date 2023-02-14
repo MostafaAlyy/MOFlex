@@ -5,17 +5,96 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'package:moshahda_app/Models/MovieModel.dart';
 import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
-import 'package:moshahda_app/ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import 'package:moshahda_app/ViewModel/Database/local/SQFlightHelper.dart';
-import 'package:sqflite/sqflite.dart';
 
+import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
+import '../../ViewModel/admobAdsManger.dart';
 import 'desktopWebView.dart';
 
-class MovieDetailedScr extends StatelessWidget {
+class MovieDetailedScr extends StatefulWidget {
   MovieModel movie;
   MovieDetailedScr(this.movie);
+
+  @override
+  State<MovieDetailedScr> createState() => _MovieDetailedScrState();
+}
+
+class _MovieDetailedScrState extends State<MovieDetailedScr> {
+  BannerAd? banner;
+  RewardedAd? rewardedAd;
+
+  void createBannerAd() {
+    banner = BannerAd(
+        size: AdSize.fullBanner,
+        adUnitId: AdsManger.bannerAdUnit,
+        listener: AdsManger.bannerAdListener,
+        request: const AdRequest())
+      ..load();
+  }
+
+  void createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: AdsManger.rewardedAdUnit,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (ad) => setState(() => rewardedAd = ad),
+            onAdFailedToLoad: (error) => setState(
+                  () {
+                    debugPrint(error.message);
+                    rewardedAd = null;
+                  },
+                )));
+  }
+
+  void showRewardedAd({required Function afterReward}) {
+    if (rewardedAd == null) {
+      print('Warning: attempt to show rewarded before loaded.');
+      setState(() {
+        createRewardedAd();
+      });
+      return;
+    }
+    rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        afterReward;
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createRewardedAd();
+      },
+    );
+
+    rewardedAd!.setImmersiveMode(true);
+    rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      afterReward.call();
+      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+    });
+    rewardedAd = null;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createBannerAd();
+    createRewardedAd();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +120,7 @@ class MovieDetailedScr extends StatelessWidget {
                         height: 400,
                         width: double.infinity,
                         child: CachedNetworkImage(
-                          imageUrl: movie.img!,
+                          imageUrl: widget.movie.img!,
                           fit: BoxFit.fill,
                           placeholder: (context, url) =>
                               CircularProgressIndicator(),
@@ -105,18 +184,21 @@ class MovieDetailedScr extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   if (!Platform.isWindows) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              VideoPlayerScr(movie.link!)),
-                                    );
+                                    showRewardedAd(afterReward: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VideoPlayerScr(
+                                                    widget.movie.link!)),
+                                      );
+                                    });
                                   } else {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              DesktopWebView(movie.link!)),
+                                          builder: (context) => DesktopWebView(
+                                              widget.movie.link!)),
                                     );
                                   }
                                 },
@@ -133,14 +215,14 @@ class MovieDetailedScr extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                movie.name!,
+                                widget.movie.name!,
                                 style: GoogleFonts.roboto(
                                     color: Colors.white, fontSize: 24),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                "Date: ${movie.dateTime} ",
+                                "Date: ${widget.movie.dateTime} ",
                                 style: const TextStyle(
                                     color: Colors.grey,
                                     fontSize: 14,
@@ -154,10 +236,13 @@ class MovieDetailedScr extends StatelessWidget {
                       )
                     ],
                   ),
+                  if (banner != null)
+                    Container(
+                        height: 100, width: 400, child: AdWidget(ad: banner!)),
                   Padding(
                     padding: const EdgeInsets.all(12),
                     child: Text(
-                      movie.description!,
+                      widget.movie.description!,
                       style:
                           GoogleFonts.roboto(color: Colors.white, fontSize: 18),
                     ),
@@ -167,14 +252,15 @@ class MovieDetailedScr extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  cupit.FavoriteMoviestoDB(movie);
+                  cupit.FavoriteMoviestoDB(widget.movie);
                   // print(cupit.favoriteMovies.toString());
                 },
                 backgroundColor: Colors.grey.withOpacity(0.2),
                 child: Icon(
                   Icons.favorite,
                   size: 40,
-                  color: (HomeCubit.favoriteMovies.containsKey('${movie.name}'))
+                  color: (HomeCubit.favoriteMovies
+                          .containsKey('${widget.movie.name}'))
                       ? Colors.redAccent
                       : Colors.grey[300]!.withOpacity(0.2),
                 )),

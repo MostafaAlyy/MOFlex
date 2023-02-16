@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     Transitiont(
-                                        child: ShowAll(cupit.moviesList,
+                                        child: ShowAll(HomeCubit.moviesList,
                                             "English Movies", cupit),
                                         transitionEffect:
                                             TransitionEffect.SCALE));
@@ -72,15 +72,15 @@ class Home extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: ((context, index) => movieCard(
                                 context: context,
-                                imgLink: cupit.moviesList[index].img!,
-                                model: cupit.moviesList[index])),
+                                imgLink: HomeCubit.moviesList[index].img!,
+                                model: HomeCubit.moviesList[index])),
                             separatorBuilder: ((context, index) =>
                                 const SizedBox(
                                   width: 10,
                                 )),
-                            itemCount: (cupit.moviesList.length >= 10)
+                            itemCount: (HomeCubit.moviesList.length >= 10)
                                 ? 10
-                                : cupit.moviesList.length),
+                                : HomeCubit.moviesList.length),
                       ),
                       const SizedBox(
                         height: 20,
@@ -98,8 +98,10 @@ class Home extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     Transitiont(
-                                        child: ShowAll(cupit.arabicMoviesList,
-                                            "Arabic Movies", cupit),
+                                        child: ShowAll(
+                                            HomeCubit.arabicMoviesList,
+                                            "Arabic Movies",
+                                            cupit),
                                         transitionEffect:
                                             TransitionEffect.SCALE));
                               },
@@ -119,15 +121,15 @@ class Home extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: ((context, index) => movieCard(
                                 context: context,
-                                imgLink: cupit.arabicMoviesList[index].img!,
-                                model: cupit.arabicMoviesList[index])),
+                                imgLink: HomeCubit.arabicMoviesList[index].img!,
+                                model: HomeCubit.arabicMoviesList[index])),
                             separatorBuilder: ((context, index) =>
                                 const SizedBox(
                                   width: 10,
                                 )),
-                            itemCount: (cupit.arabicMoviesList.length >= 10)
+                            itemCount: (HomeCubit.arabicMoviesList.length >= 10)
                                 ? 10
-                                : cupit.arabicMoviesList.length),
+                                : HomeCubit.arabicMoviesList.length),
                       ),
                       const SizedBox(
                         height: 20,
@@ -146,7 +148,7 @@ class Home extends StatelessWidget {
                                     context,
                                     Transitiont(
                                         child: ShowAllSeries(
-                                            cupit.englishSeriesList,
+                                            HomeCubit.englishSeriesList,
                                             "English Series",
                                             cupit),
                                         transitionEffect:
@@ -168,15 +170,17 @@ class Home extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: ((context, index) => seriesCard(
                                 context: context,
-                                imgLink: cupit.englishSeriesList[index].img!,
-                                model: cupit.englishSeriesList[index])),
+                                imgLink:
+                                    HomeCubit.englishSeriesList[index].img!,
+                                model: HomeCubit.englishSeriesList[index])),
                             separatorBuilder: ((context, index) =>
                                 const SizedBox(
                                   width: 10,
                                 )),
-                            itemCount: (cupit.englishSeriesList.length >= 10)
-                                ? 10
-                                : cupit.englishSeriesList.length),
+                            itemCount:
+                                (HomeCubit.englishSeriesList.length >= 10)
+                                    ? 10
+                                    : HomeCubit.englishSeriesList.length),
                       ),
                       const SizedBox(
                         height: 20,
@@ -195,7 +199,7 @@ class Home extends StatelessWidget {
                                     context,
                                     Transitiont(
                                         child: ShowAllSeries(
-                                            cupit.arabicSeriesList,
+                                            HomeCubit.arabicSeriesList,
                                             "Arabic Series",
                                             cupit),
                                         transitionEffect:
@@ -217,15 +221,15 @@ class Home extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: ((context, index) => seriesCard(
                                 context: context,
-                                imgLink: cupit.arabicSeriesList[index].img!,
-                                model: cupit.arabicSeriesList[index])),
+                                imgLink: HomeCubit.arabicSeriesList[index].img!,
+                                model: HomeCubit.arabicSeriesList[index])),
                             separatorBuilder: ((context, index) =>
                                 const SizedBox(
                                   width: 10,
                                 )),
-                            itemCount: (cupit.arabicSeriesList.length >= 10)
+                            itemCount: (HomeCubit.arabicSeriesList.length >= 10)
                                 ? 10
-                                : cupit.arabicSeriesList.length),
+                                : HomeCubit.arabicSeriesList.length),
                       ),
                       const SizedBox(
                         height: 20,
@@ -244,7 +248,7 @@ class Home extends StatelessWidget {
                                     context,
                                     Transitiont(
                                         child: ShowAllSeries(
-                                            cupit.ramadan2022SeriesList,
+                                            HomeCubit.ramadan2022SeriesList,
                                             "Ramadan 2022",
                                             cupit),
                                         transitionEffect:
@@ -267,16 +271,16 @@ class Home extends StatelessWidget {
                             itemBuilder: ((context, index) => seriesCard(
                                 context: context,
                                 imgLink:
-                                    cupit.ramadan2022SeriesList[index].img!,
-                                model: cupit.ramadan2022SeriesList[index])),
+                                    HomeCubit.ramadan2022SeriesList[index].img!,
+                                model: HomeCubit.ramadan2022SeriesList[index])),
                             separatorBuilder: ((context, index) =>
                                 const SizedBox(
                                   width: 10,
                                 )),
                             itemCount:
-                                (cupit.ramadan2022SeriesList.length >= 10)
+                                (HomeCubit.ramadan2022SeriesList.length >= 10)
                                     ? 10
-                                    : cupit.ramadan2022SeriesList.length),
+                                    : HomeCubit.ramadan2022SeriesList.length),
                       ),
                       const SizedBox(
                         height: 20,
@@ -295,7 +299,7 @@ class Home extends StatelessWidget {
                                     context,
                                     Transitiont(
                                         child: ShowAllSeries(
-                                            cupit.ramadan2023SeriesList,
+                                            HomeCubit.ramadan2023SeriesList,
                                             "Ramadan 2023",
                                             cupit),
                                         transitionEffect:
@@ -318,16 +322,16 @@ class Home extends StatelessWidget {
                             itemBuilder: ((context, index) => seriesCard(
                                 context: context,
                                 imgLink:
-                                    cupit.ramadan2023SeriesList[index].img!,
-                                model: cupit.ramadan2023SeriesList[index])),
+                                    HomeCubit.ramadan2023SeriesList[index].img!,
+                                model: HomeCubit.ramadan2023SeriesList[index])),
                             separatorBuilder: ((context, index) =>
                                 const SizedBox(
                                   width: 10,
                                 )),
                             itemCount:
-                                (cupit.ramadan2023SeriesList.length >= 10)
+                                (HomeCubit.ramadan2023SeriesList.length >= 10)
                                     ? 10
-                                    : cupit.ramadan2023SeriesList.length),
+                                    : HomeCubit.ramadan2023SeriesList.length),
                       ),
                       const SizedBox(
                         height: 20,

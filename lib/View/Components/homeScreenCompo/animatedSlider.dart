@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
+import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../General/MovieCard.dart';
 
 Widget animatedSlider(var cupit, var context) => Align(
@@ -13,10 +14,10 @@ Widget animatedSlider(var cupit, var context) => Align(
       child: ScrollSnapList(
         itemBuilder: ((context, index) => movieCard(
             context: context,
-            imgLink: cupit.moviesList[index].img!,
-            model: cupit.moviesList[index])),
+            imgLink: HomeCubit.moviesList[index].img!,
+            model: HomeCubit.moviesList[index])),
         itemCount:
-            (cupit.moviesList.length >= 10) ? 10 : cupit.moviesList.length,
+            (HomeCubit.moviesList.length >= 10) ? 10 : cupit.moviesList.length,
         itemSize: MediaQuery.of(context).size.width / 2.98,
         onItemFocus: cupit.onItemFocuss,
         dynamicItemSize: true,

@@ -158,10 +158,10 @@ class HomeCubit extends Cubit<HomeState> {
     emit(SeriesToDBLoadingState());
   }
 
-  List<MovieModel> moviesList = [];
-  List<MovieModel> arabicMoviesList = [];
+  static List<MovieModel> moviesList = [];
+  static List<MovieModel> arabicMoviesList = [];
 
-  getEnglishMovies() {
+  static getEnglishMovies() {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -171,11 +171,7 @@ class HomeCubit extends Cubit<HomeState> {
         value.data()!.forEach((key, value) {
           moviesList.add(MovieModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
-      }).catchError((onError) {
-        emit(GetMoviesErrorState());
-      });
+      }).catchError((onError) {});
     } else {
       Firestore.instance
           .collection('movies')
@@ -185,15 +181,11 @@ class HomeCubit extends Cubit<HomeState> {
         value.map.forEach((key, value) {
           moviesList.add(MovieModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
-      }).catchError((onError) {
-        emit(GetMoviesErrorState());
-      });
+      }).catchError((onError) {});
     }
   }
 
-  getArabicMovies() {
+  static getArabicMovies() {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -203,11 +195,7 @@ class HomeCubit extends Cubit<HomeState> {
         value.data()!.forEach((key, value) {
           arabicMoviesList.add(MovieModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
-      }).catchError((onError) {
-        emit(GetMoviesErrorState());
-      });
+      }).catchError((onError) {});
     } else {
       Firestore.instance
           .collection('movies')
@@ -217,11 +205,7 @@ class HomeCubit extends Cubit<HomeState> {
         value.map.forEach((key, value) {
           arabicMoviesList.add(MovieModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
-      }).catchError((onError) {
-        emit(GetMoviesErrorState());
-      });
+      }).catchError((onError) {});
     }
   }
 
@@ -238,8 +222,8 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  List<SeriesModel> englishSeriesList = [];
-  getEnglishSeries() {
+  static List<SeriesModel> englishSeriesList = [];
+  static getEnglishSeries() {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -249,11 +233,8 @@ class HomeCubit extends Cubit<HomeState> {
         value.data()!.forEach((key, value) {
           englishSeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     } else {
       Firestore.instance
@@ -264,17 +245,14 @@ class HomeCubit extends Cubit<HomeState> {
         value.map.forEach((key, value) {
           englishSeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     }
   }
 
-  List<SeriesModel> arabicSeriesList = [];
-  getArabicSeries() {
+  static List<SeriesModel> arabicSeriesList = [];
+  static getArabicSeries() {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -284,11 +262,8 @@ class HomeCubit extends Cubit<HomeState> {
         value.data()!.forEach((key, value) {
           arabicSeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     } else {
       Firestore.instance
@@ -299,17 +274,14 @@ class HomeCubit extends Cubit<HomeState> {
         value.map.forEach((key, value) {
           arabicSeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     }
   }
 
-  List<SeriesModel> ramadan2022SeriesList = [];
-  getRamadan2022Series() {
+  static List<SeriesModel> ramadan2022SeriesList = [];
+  static getRamadan2022Series() {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -319,11 +291,8 @@ class HomeCubit extends Cubit<HomeState> {
         value.data()!.forEach((key, value) {
           ramadan2022SeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     } else {
       Firestore.instance
@@ -334,17 +303,14 @@ class HomeCubit extends Cubit<HomeState> {
         value.map.forEach((key, value) {
           ramadan2022SeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesErrorState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     }
   }
 
-  List<SeriesModel> ramadan2023SeriesList = [];
-  getRamadan2023Series() {
+  static List<SeriesModel> ramadan2023SeriesList = [];
+  static getRamadan2023Series() {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -354,11 +320,8 @@ class HomeCubit extends Cubit<HomeState> {
         value.data()!.forEach((key, value) {
           ramadan2023SeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     } else {
       Firestore.instance
@@ -369,11 +332,8 @@ class HomeCubit extends Cubit<HomeState> {
         value.map.forEach((key, value) {
           ramadan2023SeriesList.add(SeriesModel.fromJson(value));
         });
-
-        emit(GetMoviesSuccessState());
       }).catchError((onError) {
         print(onError.toString());
-        emit(GetMoviesErrorState());
       });
     }
   }

@@ -154,14 +154,15 @@ class Favorite extends StatelessWidget {
                                           .favoriteSeries[HomeCubit
                                               .favoriteSeriesNames[index]]!
                                           .img!,
-                                      model: cupit.englishSeriesList.firstWhere(
+                                      model: HomeCubit.englishSeriesList
+                                          .firstWhere(
                                         (element) {
                                           return element.name ==
                                               HomeCubit
                                                   .favoriteSeriesNames[index];
                                         },
                                         orElse: () {
-                                          return cupit.arabicSeriesList
+                                          return HomeCubit.arabicSeriesList
                                               .firstWhere(
                                             (element) {
                                               return element.name ==
@@ -169,14 +170,15 @@ class Favorite extends StatelessWidget {
                                                       index];
                                             },
                                             orElse: () {
-                                              return cupit.ramadan2022SeriesList
+                                              return HomeCubit
+                                                  .ramadan2022SeriesList
                                                   .firstWhere((element) {
                                                 return element.name ==
                                                     HomeCubit
                                                             .favoriteSeriesNames[
                                                         index];
                                               }, orElse: () {
-                                                return cupit
+                                                return HomeCubit
                                                     .ramadan2023SeriesList
                                                     .firstWhere((element) {
                                                   return element.name ==

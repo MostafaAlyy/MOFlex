@@ -27,7 +27,7 @@ class homeBanner extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 2,
                 width: double.infinity,
                 child: CachedNetworkImage(
-                  imageUrl: cupit.moviesList[cupit.focusedIndex].img,
+                  imageUrl: HomeCubit.moviesList[cupit.focusedIndex].img!,
                   fit: BoxFit.fill,
                   placeholder: (context, url) =>
                       const CircularProgressIndicator(),

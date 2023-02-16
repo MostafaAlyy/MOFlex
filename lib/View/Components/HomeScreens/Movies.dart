@@ -23,11 +23,11 @@ class _MoviesState extends State<Movies> {
         if (cupit.moviesScrollController.position.pixels ==
             cupit.moviesScrollController.position.maxScrollExtent) {
           setState(() {
-            if (cupit.moviesLoadedCards + 10 <= cupit.moviesList.length) {
+            if (cupit.moviesLoadedCards + 10 <= HomeCubit.moviesList.length) {
               cupit.moviesLoadedCards += 10;
               print("MoviesLoadedCards=${cupit.moviesLoadedCards}");
             } else {
-              cupit.moviesLoadedCards = cupit.moviesList.length;
+              cupit.moviesLoadedCards = HomeCubit.moviesList.length;
             }
           });
         }
@@ -64,10 +64,10 @@ class _MoviesState extends State<Movies> {
                         children: [
                           movieCard(
                               context: context,
-                              imgLink: cupit.moviesList[index].img!,
-                              model: cupit.moviesList[index]),
+                              imgLink: HomeCubit.moviesList[index].img!,
+                              model: HomeCubit.moviesList[index]),
                           Text(
-                            cupit.moviesList[index].name!,
+                            HomeCubit.moviesList[index].name!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.exo2(

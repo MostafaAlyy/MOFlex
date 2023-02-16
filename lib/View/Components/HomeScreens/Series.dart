@@ -25,11 +25,11 @@ class _SeriesState extends State<Series> {
             cupit.seriesScrollController.position.maxScrollExtent) {
           setState(() {
             if (cupit.seriesLoadedCards + 10 <=
-                cupit.englishSeriesList.length) {
+                HomeCubit.englishSeriesList.length) {
               cupit.seriesLoadedCards += 10;
               print("SeriesLoadedCards=${cupit.seriesLoadedCards}");
             } else {
-              cupit.seriesLoadedCards = cupit.englishSeriesList.length;
+              cupit.seriesLoadedCards = HomeCubit.englishSeriesList.length;
               print("SeriesLoadedCards=${cupit.seriesLoadedCards}");
             }
           });
@@ -67,10 +67,10 @@ class _SeriesState extends State<Series> {
                         children: [
                           seriesCard(
                               context: context,
-                              imgLink: cupit.englishSeriesList[index].img!,
-                              model: cupit.englishSeriesList[index]),
+                              imgLink: HomeCubit.englishSeriesList[index].img!,
+                              model: HomeCubit.englishSeriesList[index]),
                           Text(
-                            cupit.englishSeriesList[index].name!,
+                            HomeCubit.englishSeriesList[index].name!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.exo2(

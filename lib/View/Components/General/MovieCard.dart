@@ -21,13 +21,13 @@ Widget movieCard(
           bottomRight: Radius.circular(20),
         )),
         clipBehavior: Clip.hardEdge,
-        height: 160,
-        width: 142,
+        height: MediaQuery.of(context).size.height / 5.2,
+        width: MediaQuery.of(context).size.width / 3,
         child: CachedNetworkImage(
           imageUrl: imgLink,
           fit: BoxFit.fill,
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ));
 }

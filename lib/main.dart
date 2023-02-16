@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:moshahda_app/View/Pages/GetStarted.dart';
 import 'package:sqflite/sqflite.dart';
@@ -20,7 +22,31 @@ void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await CashHelper.init();
+  if (Platform.isAndroid) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
 
+    await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+
+    var swAvailable = await AndroidWebViewFeature.isFeatureSupported(
+        AndroidWebViewFeature.SERVICE_WORKER_BASIC_USAGE);
+    var swInterceptAvailable = await AndroidWebViewFeature.isFeatureSupported(
+        AndroidWebViewFeature.SERVICE_WORKER_SHOULD_INTERCEPT_REQUEST);
+
+    if (swAvailable && swInterceptAvailable) {
+      AndroidServiceWorkerController serviceWorkerController =
+          AndroidServiceWorkerController.instance();
+
+      await serviceWorkerController
+          .setServiceWorkerClient(AndroidServiceWorkerClient(
+        shouldInterceptRequest: (request) async {
+          print(request);
+          return null;
+        },
+      ));
+    }
+  }
   String? uId = CashHelper.getData(key: 'uId');
   Widget? widget;
 

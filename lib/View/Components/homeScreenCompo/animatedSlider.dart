@@ -6,10 +6,10 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../General/MovieCard.dart';
 
-Widget animatedSlider(var cupit) => Align(
+Widget animatedSlider(var cupit, var context) => Align(
     alignment: Alignment.center,
     child: SizedBox(
-      height: 160,
+      height: MediaQuery.of(context).size.height / 4.5,
       child: ScrollSnapList(
         itemBuilder: ((context, index) => movieCard(
             context: context,
@@ -17,7 +17,7 @@ Widget animatedSlider(var cupit) => Align(
             model: cupit.moviesList[index])),
         itemCount:
             (cupit.moviesList.length >= 10) ? 10 : cupit.moviesList.length,
-        itemSize: 150,
+        itemSize: MediaQuery.of(context).size.width / 2.98,
         onItemFocus: cupit.onItemFocuss,
         dynamicItemSize: true,
         padding: EdgeInsets.zero,

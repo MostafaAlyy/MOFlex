@@ -55,8 +55,8 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
       print('Warning: attempt to show rewarded before loaded.');
       setState(() {
         createRewardedAd();
-        showInterstitialAd();
         afterReward.call();
+        showInterstitialAd();
       });
       return;
     }
@@ -157,20 +157,20 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                   children: [
                     Stack(
                       children: [
-                        Container(
-                          height: 400,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 2.18,
                           width: double.infinity,
                           child: CachedNetworkImage(
                             imageUrl: widget.Series.img!,
                             fit: BoxFit.fill,
                             placeholder: (context, url) =>
-                                CircularProgressIndicator(),
+                                const CircularProgressIndicator(),
                             errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                         Container(
-                            height: 500,
+                            height: MediaQuery.of(context).size.height / 1.7,
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                     colors: [
@@ -183,7 +183,7 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                     begin: Alignment.bottomCenter))),
                         //back button
                         Positioned(
-                            top: 20,
+                            top: MediaQuery.of(context).size.height / 30,
                             child: IconButton(
                               icon: const Icon(
                                 FontAwesomeIcons.chevronLeft,
@@ -195,8 +195,8 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                             )),
                         //play button
                         Positioned(
-                            top: 370,
-                            left: 310,
+                            top: MediaQuery.of(context).size.height / 2.4,
+                            left: MediaQuery.of(context).size.width - 90,
                             child: Container(
                               height: 70,
                               width: 70,
@@ -248,8 +248,8 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                               ),
                             )),
                         Positioned(
-                          left: 10,
-                          top: 410,
+                          left: MediaQuery.of(context).size.width / 16,
+                          top: MediaQuery.of(context).size.height / 2.1,
                           child: SizedBox(
                             width: 300,
                             child: Column(
@@ -278,14 +278,18 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                         )
                       ],
                     ),
-                    Container(
-                        height: 100, width: 400, child: AdWidget(ad: banner!)),
+                    if (banner != null)
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 10,
+                          width: MediaQuery.of(context).size.width,
+                          child: AdWidget(ad: banner!)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        height: widget.Series.links!.length * 140,
+                        height: widget.Series.links!.length *
+                            (MediaQuery.of(context).size.height / 6),
                         child: ListView.separated(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: widget.Series.links!.length,
                           itemBuilder: (context, index) => SeriesEpisodCard(
                               onPlay: () => showRewardedAd(afterReward: () {

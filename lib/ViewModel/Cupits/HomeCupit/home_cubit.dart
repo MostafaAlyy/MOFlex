@@ -331,11 +331,11 @@ class HomeCubit extends Cubit<HomeState> {
           .document('Ramadan 2022')
           .get()
           .then((value) {
-        value.map!.forEach((key, value) {
+        value.map.forEach((key, value) {
           ramadan2022SeriesList.add(SeriesModel.fromJson(value));
         });
 
-        emit(GetMoviesSuccessState());
+        emit(GetMoviesErrorState());
       }).catchError((onError) {
         print(onError.toString());
         emit(GetMoviesErrorState());

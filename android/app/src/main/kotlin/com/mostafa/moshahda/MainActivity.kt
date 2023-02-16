@@ -1,4 +1,4 @@
-package com.example.moshahda_app
+package com.mostafa.moshahda
 
 import io.flutter.embedding.android.FlutterActivity
 

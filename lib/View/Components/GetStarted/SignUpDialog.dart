@@ -17,9 +17,9 @@ Future signUpDialog({
       barrierLabel: "Sign In",
       pageBuilder: (context, animation, secondaryAnimation) => Center(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              height: 620,
-              width: 400,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              height: MediaQuery.of(context).size.height / 1.2,
+              width: MediaQuery.of(context).size.width / 1.1,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -31,20 +31,20 @@ Future signUpDialog({
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 100,
-                          width: 200,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 7.5,
+                          width: MediaQuery.of(context).size.width / 1.7,
                           child: Image.asset(
                             'assets/MainLogo.png',
                             scale: 1,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: 350,
-                          height: 50,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: MediaQuery.of(context).size.height / 16,
                           child: defaultTextFormFelid(
                               fillColor: Colors.grey,
                               controller: NameController,
@@ -54,12 +54,12 @@ Future signUpDialog({
                                 color: Colors.black,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: 350,
-                          height: 50,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: MediaQuery.of(context).size.height / 16,
                           child: defaultTextFormFelid(
                               fillColor: Colors.grey,
                               controller: emailController,
@@ -69,12 +69,12 @@ Future signUpDialog({
                                 color: Colors.black,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: 350,
-                          height: 50,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: MediaQuery.of(context).size.height / 16,
                           child: defaultTextFormFelid(
                               fillColor: Colors.grey,
                               controller: passController,
@@ -84,12 +84,12 @@ Future signUpDialog({
                                 color: Colors.black,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: 350,
-                          height: 50,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: MediaQuery.of(context).size.height / 16,
                           child: defaultTextFormFelid(
                               fillColor: Colors.grey,
                               controller: confirmPasswordController,
@@ -99,10 +99,11 @@ Future signUpDialog({
                                 color: Colors.black,
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         defultGrediantButton(
+                            context: context,
                             text: "Sign Up",
                             ontab: () {
                               cupit.userRegister(

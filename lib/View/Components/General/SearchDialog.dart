@@ -1,12 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
+
+import 'package:moshahda_app/View/Components/General/defultSearchBar.dart';
 import 'package:moshahda_app/View/Components/General/movieSearchCard.dart';
 import 'package:moshahda_app/View/Components/General/seriesSearchCard.dart';
-import 'package:transition/transition.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
-import '../../Pages/MovieDetailedScr.dart';
 
 Future searchDialog({required BuildContext context, required var cupit}) {
   return showGeneralDialog(
@@ -18,9 +16,9 @@ Future searchDialog({required BuildContext context, required var cupit}) {
       return StatefulBuilder(
         builder: (context, setState) => Center(
             child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                height: 700,
-                width: 400,
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                height: MediaQuery.of(context).size.height / 1.2,
+                width: MediaQuery.of(context).size.width / 1.1,
                 clipBehavior: Clip.hardEdge,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -30,50 +28,42 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                       padding: const EdgeInsets.all(10.0),
                       child: SingleChildScrollView(
                         child: SizedBox(
-                            height: 670,
-                            width: 400,
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 35,
-                                    ),
-                                    AnimSearchBar(
-                                      width: 300,
-                                      textController: cupit.searchController,
-                                      onSuffixTap: () {
-                                        setState(() {
-                                          HomeCubit.searchListMovies.clear();
-                                          HomeCubit.searchListSeries.clear();
-                                          cupit.searchController.clear();
-                                        });
-                                      },
-                                      onSubmitted: (p0) {
-                                        setState(() {
-                                          if (moviesSelected) {
-                                            HomeCubit.searchListMovies.clear();
-                                            cupit.SearchFunctionMovies(p0);
-                                            print(HomeCubit
-                                                .searchListMovies.length);
-                                          } else {
-                                            HomeCubit.searchListSeries.clear();
-                                            cupit.SearchFunctionSeries(p0);
-                                            print(HomeCubit
-                                                .searchListSeries.length);
-                                          }
-                                        });
-                                      },
-                                    ),
-                                  ],
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                defaultSearchBar(
+                                  cupit: cupit,
+                                  onchange: (String? p0) {
+                                    setState(() {
+                                      if (moviesSelected) {
+                                        HomeCubit.searchListMovies.clear();
+                                        cupit.SearchFunctionMovies(p0!);
+                                      } else {
+                                        HomeCubit.searchListSeries.clear();
+                                        cupit.SearchFunctionSeries(p0!);
+                                      }
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                        height: 40,
-                                        width: 120,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                22,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
                                         child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
@@ -81,7 +71,7 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                                       BorderRadius.circular(
                                                           30)),
                                               backgroundColor: (moviesSelected)
-                                                  ? Color.fromARGB(
+                                                  ? const Color.fromARGB(
                                                       255, 3, 41, 72)
                                                   : Colors.grey
                                                       .withOpacity(0.3),
@@ -98,16 +88,21 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                                   color: Colors.white,
                                                   fontSize: 20),
                                             ))),
-                                    const SizedBox(
-                                      width: 40,
-                                    ),
                                     SizedBox(
-                                        height: 40,
-                                        width: 120,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                12),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                22,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
                                         child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: (!moviesSelected)
-                                                  ? Color.fromARGB(
+                                                  ? const Color.fromARGB(
                                                       255, 3, 41, 72)
                                                   : Colors.grey
                                                       .withOpacity(0.3),
@@ -131,12 +126,14 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 15,
+                                  height: 10,
                                 ),
                                 if (moviesSelected)
                                   SizedBox(
-                                    height: 500,
-                                    width: 400,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.25,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.1,
                                     child: ListView.separated(
                                         itemBuilder: (context, index) {
                                           return movieSearchCard(
@@ -154,8 +151,10 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                   )
                                 else
                                   SizedBox(
-                                    height: 500,
-                                    width: 400,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.25,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.1,
                                     child: ListView.separated(
                                         itemBuilder: (context, index) {
                                           return seriesSearchCard(

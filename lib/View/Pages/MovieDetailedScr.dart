@@ -56,8 +56,8 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
       print('Warning: attempt to show rewarded before loaded.');
       setState(() {
         createRewardedAd();
-        showInterstitialAd();
         afterReward.call();
+        showInterstitialAd();
       });
       return;
     }
@@ -162,20 +162,20 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        height: 400,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 2.18,
                         width: double.infinity,
                         child: CachedNetworkImage(
                           imageUrl: widget.movie.img!,
                           fit: BoxFit.fill,
                           placeholder: (context, url) =>
-                              CircularProgressIndicator(),
+                              const CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                              const Icon(Icons.error),
                         ),
                       ),
                       Container(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height / 1.7,
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
                                   colors: [
@@ -188,7 +188,7 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                                   begin: Alignment.bottomCenter))),
                       //back button
                       Positioned(
-                          top: 20,
+                          top: MediaQuery.of(context).size.height / 30,
                           child: IconButton(
                             icon: const Icon(
                               FontAwesomeIcons.chevronLeft,
@@ -200,8 +200,8 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                           )),
                       //play button
                       Positioned(
-                          top: 370,
-                          left: 310,
+                          top: MediaQuery.of(context).size.height / 2.4,
+                          left: MediaQuery.of(context).size.width - 90,
                           child: Container(
                             height: 70,
                             width: 70,
@@ -252,10 +252,10 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                             ),
                           )),
                       Positioned(
-                        left: 10,
-                        top: 410,
+                        left: MediaQuery.of(context).size.width / 16,
+                        top: MediaQuery.of(context).size.height / 2.1,
                         child: SizedBox(
-                          width: 300,
+                          width: MediaQuery.of(context).size.width / 1.3,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,8 +283,10 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                     ],
                   ),
                   if (banner != null)
-                    Container(
-                        height: 100, width: 400, child: AdWidget(ad: banner!)),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height / 10,
+                        width: MediaQuery.of(context).size.width,
+                        child: AdWidget(ad: banner!)),
                   Padding(
                     padding: const EdgeInsets.all(12),
                     child: Text(

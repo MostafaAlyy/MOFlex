@@ -10,12 +10,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //   Admob.initialize();
-
     return BlocProvider(
       create: (context) => HomeCubit()
         ..getEnglishSeries()
         ..getRamadan2022Series()
+        ..getRamadan2023Series()
         ..getArabicSeries()
         ..getEnglishMovies()
         ..getArabicMovies(),
@@ -29,7 +28,7 @@ class HomePage extends StatelessWidget {
           return Scaffold(
               backgroundColor: const Color.fromARGB(1000, 11, 10, 28),
               body: ConditionalBuilder(
-                  condition: cupit.moviesList.length > 0,
+                  condition: cupit.moviesList.isNotEmpty,
                   builder: (context) => cupit.screens[cupit.currentPage],
                   fallback: (context) => const Center(
                         child: CircularProgressIndicator(

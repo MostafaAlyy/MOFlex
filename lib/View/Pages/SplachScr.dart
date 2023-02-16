@@ -54,13 +54,13 @@ class _SplashScrState extends State<SplashScr>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-                height: 300,
-                width: 300,
+            SizedBox(
+                width: MediaQuery.of(context).size.width / 1.2,
+                height: MediaQuery.of(context).size.height / 3,
                 child: Image.asset('assets/MainLogo.png')),
             Container(
-              height: 20,
-              width: 350,
+              width: MediaQuery.of(context).size.width / 1.2,
+              height: MediaQuery.of(context).size.height / 24,
               child: LiquidLinearProgressIndicator(
                 valueColor: const AlwaysStoppedAnimation(Colors.deepOrange),
                 borderRadius: 20,
@@ -69,7 +69,7 @@ class _SplashScrState extends State<SplashScr>
                   '${percentage.toStringAsFixed(0)}%',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+                    fontSize: 17.0,
                     color: Colors.black,
                   ),
                 ),

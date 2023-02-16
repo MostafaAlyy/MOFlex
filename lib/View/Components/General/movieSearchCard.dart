@@ -14,7 +14,7 @@ Widget movieSearchCard(
       Navigator.push(
           context,
           Transitiont(
-              child: MovieDetailedScr(HomeCubit.searchListMovies[index]!),
+              child: MovieDetailedScr(HomeCubit.searchListMovies[index]),
               transitionEffect: TransitionEffect.SCALE));
     },
     child: Container(
@@ -34,8 +34,9 @@ Widget movieSearchCard(
               child: CachedNetworkImage(
                 imageUrl: HomeCubit.searchListMovies[index].img!,
                 fit: BoxFit.fill,
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),

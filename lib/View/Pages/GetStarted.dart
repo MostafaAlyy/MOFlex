@@ -68,6 +68,7 @@ class GetStart extends StatelessWidget {
           var cupit = AuthCubit.get(context);
           return Scaffold(
               body: Stack(
+            alignment: Alignment.center,
             children: [
               SizedBox(
                   height: double.infinity,
@@ -77,9 +78,9 @@ class GetStart extends StatelessWidget {
                     fit: BoxFit.fill,
                   )),
               Positioned(
-                bottom: 50,
-                left: 22,
+                top: MediaQuery.of(context).size.height - 90,
                 child: defultGrediantButton(
+                    context: context,
                     text: "Get Started",
                     ontab: (() => signInDialog(
                           cupit: cupit,
@@ -90,7 +91,15 @@ class GetStart extends StatelessWidget {
                               cupit.confirmPasswordController,
                           NameController: cupit.NameController,
                         ))),
-              )
+              ),
+              Positioned(
+                  top: MediaQuery.of(context).size.height - 30,
+                  child: const Text(
+                    '©️ App UI Designed By Ahmed Moslm ',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ))
             ],
           ));
         },

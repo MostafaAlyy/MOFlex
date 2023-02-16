@@ -38,7 +38,9 @@ class _MoviesState extends State<Movies> {
       controller: cupit.moviesScrollController,
       child: Container(
         width: double.infinity,
-        height: ((cupit.moviesLoadedCards / 3) * 220) + 300,
+        height: ((cupit.moviesLoadedCards / 3) *
+                (MediaQuery.of(context).size.height / 5.2)) +
+            300,
         decoration: BoxDecoration(
           //  color: Colors.grey,
           borderRadius: BorderRadius.circular(18),
@@ -50,7 +52,7 @@ class _MoviesState extends State<Movies> {
                 style: GoogleFonts.bitter(color: Colors.white, fontSize: 48)),
             Expanded(
               child: DynamicHeightGridView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: cupit.moviesLoadedCards,
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,

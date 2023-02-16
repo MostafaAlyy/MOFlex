@@ -41,7 +41,9 @@ class _SeriesState extends State<Series> {
       controller: cupit.seriesScrollController,
       child: Container(
         width: double.infinity,
-        height: ((cupit.seriesLoadedCards / 3) * 220) + 300,
+        height: ((cupit.seriesLoadedCards / 3) *
+                (MediaQuery.of(context).size.height / 5.2)) +
+            300,
         decoration: BoxDecoration(
           //  color: Colors.grey,
           borderRadius: BorderRadius.circular(18),
@@ -53,7 +55,7 @@ class _SeriesState extends State<Series> {
                 style: GoogleFonts.bitter(color: Colors.white, fontSize: 48)),
             Expanded(
               child: DynamicHeightGridView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: cupit.seriesLoadedCards,
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,

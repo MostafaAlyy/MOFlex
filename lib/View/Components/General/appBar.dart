@@ -5,17 +5,18 @@ import 'package:moshahda_app/View/Components/General/SearchDialog.dart';
 Widget mAppBar(var cupit, var context) => Column(
       children: [
         PreferredSize(
-            preferredSize: const Size.fromHeight(80.0),
+            preferredSize:
+                Size.fromHeight(MediaQuery.of(context).size.height / 12),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 80,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height / 12,
                 width: double.infinity,
                 child: Row(
                   children: [
-                    Container(
-                      height: 45,
-                      width: 60,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 20,
+                      width: MediaQuery.of(context).size.width / 7,
                       child: Image.asset(
                         'assets/MainLogo.png',
                         fit: BoxFit.fill,
@@ -31,7 +32,7 @@ Widget mAppBar(var cupit, var context) => Column(
                         fontSize: 20,
                         shadows: const [
                           Shadow(
-                            blurRadius: 20.0,
+                            blurRadius: 90.0,
                             color: Colors.black,
                             offset: Offset(6.0, 6.0),
                           ),

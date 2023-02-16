@@ -19,27 +19,29 @@ class homeBanner extends StatelessWidget {
       },
       builder: (context, state) {
         return SizedBox(
-          height: 400,
+          height: MediaQuery.of(context).size.height / 2,
+          width: double.infinity,
           child: Stack(
             children: [
               SizedBox(
-                height: 400,
+                height: MediaQuery.of(context).size.height / 2,
                 width: double.infinity,
                 child: CachedNetworkImage(
                   imageUrl: cupit.moviesList[cupit.focusedIndex].img,
                   fit: BoxFit.fill,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
               Container(
-                  height: 400,
+                  height: MediaQuery.of(context).size.height / 2,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [
                     const Color.fromARGB(1000, 11, 10, 28).withOpacity(0.60),
                     const Color.fromARGB(1000, 11, 10, 28).withOpacity(0.0),
                   ], end: Alignment.topCenter, begin: Alignment.bottomCenter))),
-              animatedSlider(cupit),
+              animatedSlider(cupit, context),
               homeDotsIndicator(cupit),
               mAppBar(cupit, context),
             ],

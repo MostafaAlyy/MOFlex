@@ -14,6 +14,7 @@ Widget SeriesEpisodCard(
     required var context,
     required Function onPlay}) {
   return Container(
+    height: MediaQuery.of(context).size.height / 8,
     decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.3),
         borderRadius: BorderRadius.circular(18)),
@@ -22,15 +23,15 @@ Widget SeriesEpisodCard(
       child: Row(
         children: [
           Container(
-            height: 100,
-            width: 100,
+            height: MediaQuery.of(context).size.height / 10,
+            width: MediaQuery.of(context).size.height / 10,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
             child: CachedNetworkImage(
               imageUrl: Series.img!,
               fit: BoxFit.fill,
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           const SizedBox(
@@ -40,7 +41,7 @@ Widget SeriesEpisodCard(
             "Episode  ${index + 1}  \n ${index + 1} الحلقة ",
             style: const TextStyle(fontSize: 20, color: Colors.white),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             height: 70,
             width: 70,

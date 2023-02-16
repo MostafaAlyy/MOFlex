@@ -26,16 +26,17 @@ Widget seriesSearchCard(
         child: Row(children: [
           Center(
             child: Container(
-              height: 90,
-              width: 90,
+              height: MediaQuery.of(context).size.height / 10,
+              width: MediaQuery.of(context).size.height / 10,
               clipBehavior: Clip.hardEdge,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(18)),
               child: CachedNetworkImage(
                 imageUrl: HomeCubit.searchListSeries[index].img!,
                 fit: BoxFit.fill,
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),

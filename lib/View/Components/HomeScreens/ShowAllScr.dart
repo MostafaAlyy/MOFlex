@@ -54,8 +54,6 @@ class _ShowAllState extends State<ShowAll> {
             body: SingleChildScrollView(
               controller: cupit.showAllController,
               child: Container(
-                width: double.infinity,
-                height: ((cupit.showAllLoadedCard / 3) * 220) + 300,
                 decoration: BoxDecoration(
                   //  color: Colors.grey,
                   borderRadius: BorderRadius.circular(18),
@@ -66,9 +64,13 @@ class _ShowAllState extends State<ShowAll> {
                     Text("${title}",
                         style: GoogleFonts.bitter(
                             color: Colors.white, fontSize: 48)),
-                    Expanded(
+                    SizedBox(
+                      width: double.infinity,
+                      height: ((cupit.showAllLoadedCard / 3) *
+                              (MediaQuery.of(context).size.height / 5.2)) +
+                          (MediaQuery.of(context).size.height / 3),
                       child: DynamicHeightGridView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: cupit.showAllLoadedCard,
                           crossAxisCount: 3,
                           crossAxisSpacing: 10,

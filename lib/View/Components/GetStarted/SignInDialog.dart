@@ -21,8 +21,8 @@ Future signInDialog({
         return Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 16),
-            height: 620,
-            width: 400,
+            height: MediaQuery.of(context).size.height / 1.2,
+            width: MediaQuery.of(context).size.width / 1.1,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -34,20 +34,20 @@ Future signInDialog({
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        height: 150,
-                        width: 250,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 5.5,
+                        width: MediaQuery.of(context).size.width / 1.7,
                         child: Image.asset(
                           'assets/MainLogo.png',
                           scale: 1,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        width: 350,
-                        height: 50,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        height: MediaQuery.of(context).size.height / 16,
                         child: defaultTextFormFelid(
                             fillColor: Colors.grey,
                             controller: emailController,
@@ -57,12 +57,12 @@ Future signInDialog({
                               color: Colors.black,
                             )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        width: 350,
-                        height: 50,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        height: MediaQuery.of(context).size.height / 16,
                         child: defaultTextFormFelid(
                             fillColor: Colors.grey,
                             controller: passController,
@@ -72,15 +72,15 @@ Future signInDialog({
                               color: Colors.black,
                             )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 50,
                           ),
-                          Text(
+                          const Text(
                             "Don't have an account? ",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
@@ -96,13 +96,14 @@ Future signInDialog({
                                     NameController: NameController,
                                     cupit: cupit);
                               },
-                              child: Text("Sign Up")),
+                              child: const Text("Sign Up")),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       defultGrediantButton(
+                          context: context,
                           text: "Sign In",
                           ontab: () {
                             cupit.userLogin(

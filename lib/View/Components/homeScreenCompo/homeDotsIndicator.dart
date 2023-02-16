@@ -9,7 +9,7 @@ Widget homeDotsIndicator(var cupit) => Align(
       position: cupit.focusedIndex.toDouble(),
       decorator: DotsDecorator(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
-        color: Color.fromARGB(221, 255, 255, 255), // Inactive color
-        activeColor: Color.fromARGB(255, 140, 137, 137),
+        color: const Color.fromARGB(221, 255, 255, 255), // Inactive color
+        activeColor: const Color.fromARGB(255, 140, 137, 137),
       ),
     ));

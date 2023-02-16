@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-Widget defultGrediantButton({
-  required String text,
-  required Function() ontab,
-}) {
+Widget defultGrediantButton(
+    {required String text, required Function() ontab, required var context}) {
   return InkWell(
     onTap: ontab,
     child: Container(
-      height: 50,
-      width: 350,
+      height: MediaQuery.of(context).size.height / 15,
+      width: MediaQuery.of(context).size.width / 1.1,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(

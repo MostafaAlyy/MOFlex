@@ -23,36 +23,31 @@ class Favorite extends StatelessWidget {
         cupit.getFavoriteSeriesFromDB();
 
         return SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
-            height: ((HomeCubit.favoriteMovies.length / 3) * 230) +
-                800 +
-                ((HomeCubit.favoriteSeries.length / 3) * 230),
-            decoration: BoxDecoration(
-              //  color: Colors.grey,
-              borderRadius: BorderRadius.circular(18),
-            ),
+            height: (((HomeCubit.favoriteMovies.length / 3) + 4) *
+                (MediaQuery.of(context).size.height / 5.2)),
             child: Column(
               children: [
                 mAppBar(cupit, context),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 100,
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
                     width: double.infinity,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                            height: 170,
-                            width: 170,
+                            height: MediaQuery.of(context).size.height / 12,
+                            width: MediaQuery.of(context).size.width / 2.6,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
                                   backgroundColor: (moviesSelected)
-                                      ? Color.fromARGB(255, 3, 41, 72)
+                                      ? const Color.fromARGB(255, 3, 41, 72)
                                       : Colors.grey.withOpacity(0.3),
                                 ),
                                 onPressed: () {
@@ -67,12 +62,12 @@ class Favorite extends StatelessWidget {
                           width: 30,
                         ),
                         SizedBox(
-                            height: 170,
-                            width: 170,
+                            height: MediaQuery.of(context).size.height / 12,
+                            width: MediaQuery.of(context).size.width / 2.6,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: (!moviesSelected)
-                                      ? Color.fromARGB(255, 3, 41, 72)
+                                      ? const Color.fromARGB(255, 3, 41, 72)
                                       : Colors.grey.withOpacity(0.3),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30)),
@@ -98,7 +93,7 @@ class Favorite extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: DynamicHeightGridView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: HomeCubit.favoriteMovies.length,
                           crossAxisCount: 3,
                           crossAxisSpacing: 10,
@@ -142,7 +137,7 @@ class Favorite extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: DynamicHeightGridView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: HomeCubit.favoriteSeries.length,
                           crossAxisCount: 3,
                           crossAxisSpacing: 10,

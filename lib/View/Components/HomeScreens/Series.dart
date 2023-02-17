@@ -43,7 +43,7 @@ class _SeriesState extends State<Series> {
         width: double.infinity,
         height: ((cupit.seriesLoadedCards / 3) *
                 (MediaQuery.of(context).size.height / 5.2)) +
-            300,
+            (MediaQuery.of(context).size.height / 3),
         decoration: BoxDecoration(
           //  color: Colors.grey,
           borderRadius: BorderRadius.circular(18),

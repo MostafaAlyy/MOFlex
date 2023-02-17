@@ -40,7 +40,7 @@ class _MoviesState extends State<Movies> {
         width: double.infinity,
         height: ((cupit.moviesLoadedCards / 3) *
                 (MediaQuery.of(context).size.height / 5.2)) +
-            300,
+            (MediaQuery.of(context).size.height / 3),
         decoration: BoxDecoration(
           //  color: Colors.grey,
           borderRadius: BorderRadius.circular(18),

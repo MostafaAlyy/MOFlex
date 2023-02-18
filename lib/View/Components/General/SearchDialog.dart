@@ -23,7 +23,7 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: Scaffold(
-                    backgroundColor: Color.fromARGB(255, 11, 10, 28),
+                    backgroundColor: const Color.fromARGB(255, 11, 10, 28),
                     body: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: SingleChildScrollView(

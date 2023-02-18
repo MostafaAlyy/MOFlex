@@ -25,7 +25,7 @@ Widget defultGrediantButton(
           )),
       child: Center(
           child: Text(
-        "${text}",
+        text,
         style: const TextStyle(
             color: Color.fromARGB(255, 210, 240, 255),
             fontSize: 20,

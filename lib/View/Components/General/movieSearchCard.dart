@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:transition/transition.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../../Pages/MovieDetailedScr.dart';
-import '../../Pages/SeriesDetailedScr.dart';
 
 Widget movieSearchCard(
     {required var context, required var cupit, required var index}) {

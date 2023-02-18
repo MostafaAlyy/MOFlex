@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:moshahda_app/Models/MovieModel.dart';
 import 'package:moshahda_app/Models/SeriesModel.dart';
-import 'package:moshahda_app/View/Pages/MovieDetailedScr.dart';
 import 'package:transition/transition.dart';
 
 import '../../Pages/SeriesDetailedScr.dart';

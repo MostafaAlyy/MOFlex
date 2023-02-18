@@ -57,7 +57,9 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
       setState(() {
         createRewardedAd();
         afterReward.call();
-        showInterstitialAd();
+        if (_interstitialAd != null) {
+          showInterstitialAd();
+        }
       });
       return;
     }

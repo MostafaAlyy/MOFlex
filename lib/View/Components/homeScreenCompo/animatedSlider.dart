@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';

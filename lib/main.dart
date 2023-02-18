@@ -20,7 +20,7 @@ const apiKey = "AIzaSyAbKmjqsl6mj5JDYzN4buz3elqw2ff40ew";
 const projectId = "moshahda";
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await CashHelper.init();
   if (!Platform.isWindows) {
@@ -51,7 +51,6 @@ void main() async {
       await serviceWorkerController
           .setServiceWorkerClient(AndroidServiceWorkerClient(
         shouldInterceptRequest: (request) async {
-          print(request);
           return null;
         },
       ));

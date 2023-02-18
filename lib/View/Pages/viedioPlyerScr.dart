@@ -64,7 +64,8 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
   adLoop() {
     Future.delayed(const Duration(minutes: 15), () {
       setState(() {
-        showInterstitialAd();
+        if(_interstitialAd!=null)
+        {showInterstitialAd();}
         createInterstitialAd();
         adLoop();
       });

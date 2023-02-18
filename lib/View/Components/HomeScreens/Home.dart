@@ -7,7 +7,6 @@ import 'package:moshahda_app/View/Components/HomeScreens/ShowAllScr.dart';
 import 'package:moshahda_app/ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import 'package:transition/transition.dart';
 
-import '../General/defultSearchBar.dart';
 import '../homeScreenCompo/homeBanner.dart';
 import 'ShowAllSeriesScr.dart';
 

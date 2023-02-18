@@ -10,14 +10,14 @@ Widget defaultTextFormFelid({
     controller: controller,
     validator: (String? value) {
       if (value!.isEmpty) {
-        return "Please enter ${text}";
+        return "Please enter $text";
       }
       return null;
     },
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-      labelText: "${text}",
+      labelText: text,
       labelStyle: TextStyle(color: fillColor),
       prefixIcon: prefixIcon,
     ),

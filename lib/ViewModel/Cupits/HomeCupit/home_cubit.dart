@@ -22,7 +22,10 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(BuildContext context) => BlocProvider.of(context);
 
   refresh() {
-    emit(state);
+    Future.delayed(const Duration(seconds: 3), () {
+      debugPrint("state Refreshed");
+      emit(GetMoviesSuccessState());
+    });
   }
 
   TextEditingController searchController = TextEditingController();

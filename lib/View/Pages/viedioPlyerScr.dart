@@ -19,10 +19,71 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
 
   InAppWebViewController? webViewController;
 
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdsManger.interstitialdAdUnit,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+
+            _interstitialAd!.setImmersiveMode(true);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+
+            _interstitialAd = null;
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+  }
+
+  adLoop() {
+    Future.delayed(const Duration(minutes: 15), () {
+      setState(() {
+        showInterstitialAd();
+        createInterstitialAd();
+        adLoop();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    createInterstitialAd();
+    super.initState();
+    adLoop();
+  }
+
   @override
   void dispose() async {
     // TODO: implement dispose
     super.dispose();
+
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);

@@ -24,11 +24,14 @@ class HomePage extends StatelessWidget {
               body: ConditionalBuilder(
                   condition: HomeCubit.moviesList.isNotEmpty,
                   builder: (context) => cupit.screens[cupit.currentPage],
-                  fallback: (context) => const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.deepOrange,
-                        ),
-                      )),
+                  fallback: (context) {
+                    cupit.refresh();
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.deepOrange,
+                      ),
+                    );
+                  }),
               bottomNavigationBar: homeBottomeNavBar(cupit));
         },
       ),

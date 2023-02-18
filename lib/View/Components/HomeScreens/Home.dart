@@ -40,6 +40,58 @@ class Home extends StatelessWidget {
                       Row(
                         children: [
                           Text(
+                            "Most Watched Movies",
+                            style: GoogleFonts.roboto(
+                                color: Colors.white, fontSize: 20),
+                          ),
+                          const Spacer(),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    Transitiont(
+                                        child: ShowAll(
+                                            HomeCubit.mostWatchedMovies,
+                                            "Most Watched",
+                                            cupit),
+                                        transitionEffect:
+                                            TransitionEffect.SCALE));
+                              },
+                              child: const Text(
+                                "Show All ",
+                                style: TextStyle(fontSize: 16),
+                              ))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 5.2,
+                        child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: ((context, index) => movieCard(
+                                context: context,
+                                imgLink:
+                                    HomeCubit.mostWatchedMovies[index].img!,
+                                model: HomeCubit.mostWatchedMovies[index])),
+                            separatorBuilder: ((context, index) =>
+                                const SizedBox(
+                                  width: 10,
+                                )),
+                            itemCount:
+                                (HomeCubit.mostWatchedMovies.length >= 10)
+                                    ? 10
+                                    : HomeCubit.mostWatchedMovies.length),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Text(
                             "English Movies",
                             style: GoogleFonts.roboto(
                                 color: Colors.white, fontSize: 20),

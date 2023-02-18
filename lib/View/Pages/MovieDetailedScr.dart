@@ -130,10 +130,10 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     createInterstitialAd();
     createBannerAd();
     createRewardedAd();
+    super.initState();
   }
 
   @override

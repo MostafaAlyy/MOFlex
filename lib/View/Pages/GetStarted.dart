@@ -6,6 +6,7 @@ import 'package:moshahda_app/View/Components/GetStarted/SignInDialog.dart';
 import 'package:moshahda_app/View/Pages/HomePage.dart';
 import 'package:moshahda_app/ViewModel/Cupits/AuthCupit/general_cubit.dart';
 
+import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../../ViewModel/Database/local/sharedPreferns.dart';
 
 class GetStart extends StatelessWidget {
@@ -19,6 +20,13 @@ class GetStart extends StatelessWidget {
         listener: (context, state) {
           // TODO: implement listener
           if (state is RegistererUserSuccessState) {
+            HomeCubit.getArabicMovies();
+            HomeCubit.getEnglishMovies();
+            HomeCubit.getRamadan2022Series();
+            HomeCubit.getRamadan2023Series();
+            HomeCubit.getEnglishSeries();
+            HomeCubit.getArabicSeries();
+            HomeCubit.getMostWatchedMovies();
             Navigator.pop(context);
             Fluttertoast.showToast(
                 msg: "Register Success",
@@ -38,6 +46,13 @@ class GetStart extends StatelessWidget {
                 textColor: Colors.white,
                 fontSize: 16.0);
           } else if (state is LogInSuccessState) {
+            HomeCubit.getArabicMovies();
+            HomeCubit.getEnglishMovies();
+            HomeCubit.getRamadan2022Series();
+            HomeCubit.getRamadan2023Series();
+            HomeCubit.getEnglishSeries();
+            HomeCubit.getArabicSeries();
+            HomeCubit.getMostWatchedMovies();
             CashHelper.SaveData(key: 'uId', value: state.uId);
             Fluttertoast.showToast(
                 msg: "Sign In Success",

@@ -1,14 +1,39 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:moshahda_app/View/Components/General/MovieCard.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moshahda_app/View/Components/General/SeriesCard.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
+import '../../../ViewModel/admobAdsManger.dart';
 import '../General/appBar.dart';
 
-class Favorite extends StatelessWidget {
+class Favorite extends StatefulWidget {
+  @override
+  State<Favorite> createState() => _FavoriteState();
+}
+
+class _FavoriteState extends State<Favorite> {
+  BannerAd? banner;
+
+  void createBannerAd() {
+    banner = BannerAd(
+        size: AdSize.fullBanner,
+        adUnitId: AdsManger.bannerAdUnit,
+        listener: AdsManger.bannerAdListener,
+        request: const AdRequest())
+      ..load();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    createBannerAd();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool moviesSelected = true;
@@ -88,6 +113,11 @@ class Favorite extends StatelessWidget {
                   Text("Your Favorite Movies",
                       style: GoogleFonts.bitter(
                           color: Colors.white, fontSize: 36)),
+                if (banner != null)
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height / 10,
+                      width: MediaQuery.of(context).size.width,
+                      child: AdWidget(ad: banner!)),
                 if (moviesSelected)
                   Expanded(
                     child: Padding(

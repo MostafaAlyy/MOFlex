@@ -2,11 +2,13 @@ import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:moshahda_app/Models/MovieModel.dart';
 import 'package:moshahda_app/Models/SeriesModel.dart';
 import 'package:moshahda_app/View/Components/General/MovieCard.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
+import '../../../ViewModel/admobAdsManger.dart';
 import '../General/SeriesCard.dart';
 import '../General/appBar.dart';
 
@@ -22,6 +24,24 @@ class ShowAllSeries extends StatefulWidget {
 class _ShowAllSeriesState extends State<ShowAllSeries> {
   List<SeriesModel> movies;
   String title;
+
+  BannerAd? banner;
+
+  void createBannerAd() {
+    banner = BannerAd(
+        size: AdSize.fullBanner,
+        adUnitId: AdsManger.bannerAdUnit,
+        listener: AdsManger.bannerAdListener,
+        request: const AdRequest())
+      ..load();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    createBannerAd();
+    super.initState();
+  }
 
   _ShowAllSeriesState(this.movies, this.title);
   @override
@@ -65,6 +85,11 @@ class _ShowAllSeriesState extends State<ShowAllSeries> {
                     Text(title,
                         style: GoogleFonts.bitter(
                             color: Colors.white, fontSize: 48)),
+                    if (banner != null)
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 10,
+                          width: MediaQuery.of(context).size.width,
+                          child: AdWidget(ad: banner!)),
                     SizedBox(
                       width: double.infinity,
                       height: ((cupit.showAllLoadedCard / 3) *

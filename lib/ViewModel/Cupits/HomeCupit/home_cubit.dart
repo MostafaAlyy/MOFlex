@@ -20,6 +20,11 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
   static HomeCubit get(BuildContext context) => BlocProvider.of(context);
+
+  refresh() {
+    emit(state);
+  }
+
   TextEditingController searchController = TextEditingController();
   static List<MovieModel> searchListMovies = [];
   static List<SeriesModel> searchListSeries = [];
@@ -35,27 +40,32 @@ class HomeCubit extends Cubit<HomeState> {
         searchListMovies.add(arabicMoviesList[i]);
       }
     }
+    for (int i = 0; i < mostWatchedMovies.length; i++) {
+      if (mostWatchedMovies[i].name!.toUpperCase().contains(s.toUpperCase())) {
+        searchListMovies.add(mostWatchedMovies[i]);
+      }
+    }
     emit(SearchState());
   }
 
   SearchFunctionSeries(String s) {
     for (int i = 0; i < englishSeriesList.length; i++) {
-      if (moviesList[i].name!.toUpperCase().contains(s.toUpperCase())) {
+      if (englishSeriesList[i].name!.toUpperCase().contains(s.toUpperCase())) {
         searchListSeries.add(englishSeriesList[i]);
       }
     }
     for (int i = 0; i < arabicSeriesList.length; i++) {
-      if (arabicMoviesList[i].name!.contains(s)) {
+      if (arabicSeriesList[i].name!.contains(s)) {
         searchListSeries.add(arabicSeriesList[i]);
       }
     }
     for (int i = 0; i < ramadan2022SeriesList.length; i++) {
-      if (arabicMoviesList[i].name!.contains(s)) {
+      if (ramadan2022SeriesList[i].name!.contains(s)) {
         searchListSeries.add(ramadan2022SeriesList[i]);
       }
     }
     for (int i = 0; i < ramadan2023SeriesList.length; i++) {
-      if (arabicMoviesList[i].name!.contains(s)) {
+      if (ramadan2023SeriesList[i].name!.contains(s)) {
         searchListSeries.add(ramadan2023SeriesList[i]);
       }
     }
@@ -160,6 +170,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   static List<MovieModel> moviesList = [];
   static List<MovieModel> arabicMoviesList = [];
+  static List<MovieModel> mostWatchedMovies = [];
 
   static getEnglishMovies() {
     if (!Platform.isWindows) {
@@ -204,6 +215,30 @@ class HomeCubit extends Cubit<HomeState> {
           .then((value) {
         value.map.forEach((key, value) {
           arabicMoviesList.add(MovieModel.fromJson(value));
+        });
+      }).catchError((onError) {});
+    }
+  }
+
+  static getMostWatchedMovies() {
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('movies')
+          .doc('Most Watched Movies')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          mostWatchedMovies.add(MovieModel.fromJson(value));
+        });
+      }).catchError((onError) {});
+    } else {
+      Firestore.instance
+          .collection('movies')
+          .document('Most Watched Movies')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          mostWatchedMovies.add(MovieModel.fromJson(value));
         });
       }).catchError((onError) {});
     }

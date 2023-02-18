@@ -20,7 +20,7 @@ Future signInDialog({
       pageBuilder: (context, animation, secondaryAnimation) {
         return Center(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             height: MediaQuery.of(context).size.height / 1.2,
             width: MediaQuery.of(context).size.width / 1.1,
             clipBehavior: Clip.hardEdge,

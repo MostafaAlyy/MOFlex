@@ -67,6 +67,7 @@ void main() async {
     HomeCubit.getRamadan2023Series();
     HomeCubit.getEnglishSeries();
     HomeCubit.getArabicSeries();
+    HomeCubit.getMostWatchedMovies();
     widget = const HomePage();
   } else {
     widget = const GetStart();

@@ -29,6 +29,49 @@
             {
               "client_id": "177725354636-041ahlfn30dbre75d5cul4avb705fj32.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "177725354636-m5dq3eu1qnuqia17lhsaffq55ce9rpvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.moshahdaApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177725354636:android:aedb92bbeb06c4a75a81a9",
+        "android_client_info": {
+          "package_name": "com.mostafa.moshahda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177725354636-041ahlfn30dbre75d5cul4avb705fj32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4sltqzJv5NapZncacDR2LxOuQ5poNQzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177725354636-041ahlfn30dbre75d5cul4avb705fj32.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "177725354636-m5dq3eu1qnuqia17lhsaffq55ce9rpvf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.moshahdaApp"
+              }
             }
           ]
         }

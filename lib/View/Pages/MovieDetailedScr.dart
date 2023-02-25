@@ -14,6 +14,7 @@ import 'package:moshahda_app/ViewModel/Database/local/SQFlightHelper.dart';
 import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../../ViewModel/admobAdsManger.dart';
 import 'desktopWebView.dart';
+import 'notFoundScr.dart';
 
 class MovieDetailedScr extends StatefulWidget {
   MovieModel movie;
@@ -201,6 +202,7 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                             },
                           )),
                       //play button
+
                       Positioned(
                           top: MediaQuery.of(context).size.height / 2.4,
                           left: MediaQuery.of(context).size.width - 90,

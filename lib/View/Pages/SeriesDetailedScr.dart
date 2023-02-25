@@ -13,6 +13,7 @@ import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
 import '../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../../ViewModel/admobAdsManger.dart';
 import '../Components/General/SeriesEpisodCard.dart';
+import 'notFoundScr.dart';
 
 class SeriesDetailedScr extends StatefulWidget {
   SeriesModel Series;
@@ -229,9 +230,9 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  VideoPlayerScr(widget
-                                                      .Series.links!["1"]!)),
+                                              builder: (context) => VideoPlayerScr(
+                                                    widget.Series.links!["1"]!
+                                                  )),
                                         );
                                       });
                                     } else {
@@ -297,8 +298,8 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => VideoPlayerScr(
-                                              widget.Series
-                                                  .links!["${index + 1}"]!)),
+                                                widget.Series.links!["${index + 1}"]!
+                                              )),
                                     );
                                   }),
                               Series: widget.Series,

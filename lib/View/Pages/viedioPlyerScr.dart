@@ -64,8 +64,9 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
   adLoop() {
     Future.delayed(const Duration(minutes: 15), () {
       setState(() {
-        if(_interstitialAd!=null)
-        {showInterstitialAd();}
+        if (_interstitialAd != null) {
+          showInterstitialAd();
+        }
         createInterstitialAd();
         adLoop();
       });
@@ -83,11 +84,10 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
   @override
   void dispose() async {
     // TODO: implement dispose
-    super.dispose();
-
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    super.dispose();
   }
 
   @override

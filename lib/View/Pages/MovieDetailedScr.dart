@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:moshahda_app/Models/MovieModel.dart';
+import 'package:moshahda_app/View/Components/homeScreenCompo/serverSelect.dart';
 import 'package:moshahda_app/View/Pages/viedioPlyerScr.dart';
 import 'package:moshahda_app/ViewModel/Database/local/SQFlightHelper.dart';
 
@@ -233,24 +234,31 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                                   size: 30,
                                 ),
                                 onPressed: () {
-                                  if (!Platform.isWindows) {
-                                    showRewardedAd(afterReward: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                VideoPlayerScr(
-                                                    widget.movie.link!)),
-                                      );
-                                    });
-                                  } else {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DesktopWebView(
-                                              widget.movie.link!)),
-                                    );
-                                  }
+                                  serverSelectDialog(
+                                      context: context,
+                                      movie: widget.movie,
+                                      openMovie: (String selectedServer) {
+                                        if (!Platform.isWindows) {
+                                          showRewardedAd(afterReward: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      VideoPlayerScr(
+                                                          selectedServer)),
+                                            );
+                                          });
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DesktopWebView(
+                                                        selectedServer)),
+                                          );
+                                        }
+                                      });
+                                  /*              */
                                 },
                               ),
                             ),

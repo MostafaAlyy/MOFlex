@@ -70,7 +70,7 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
         createRewardedAd();
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        afterReward;
+        afterReward.call();
         print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
         createRewardedAd();
@@ -224,17 +224,16 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                     color: Colors.white,
                                     size: 30,
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (!Platform.isWindows) {
-                                      showRewardedAd(afterReward: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => VideoPlayerScr(
-                                                    widget.Series.links!["1"]!
-                                                  )),
-                                        );
-                                      });
+                                      showRewardedAd(afterReward: () {});
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VideoPlayerScr(widget
+                                                    .Series.links!["1"]!)),
+                                      );
                                     } else {
                                       Navigator.push(
                                         context,
@@ -293,15 +292,16 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: widget.Series.links!.length,
                           itemBuilder: (context, index) => SeriesEpisodCard(
-                              onPlay: () => showRewardedAd(afterReward: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VideoPlayerScr(
-                                                widget.Series.links!["${index + 1}"]!
-                                              )),
-                                    );
-                                  }),
+                              onPlay: () async {
+                                showRewardedAd(afterReward: () {});
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => VideoPlayerScr(
+                                          widget
+                                              .Series.links!["${index + 1}"]!)),
+                                );
+                              },
                               Series: widget.Series,
                               context: context,
                               index: index),

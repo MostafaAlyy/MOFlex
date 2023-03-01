@@ -74,7 +74,7 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
         createRewardedAd();
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        afterReward;
+        afterReward.call();
         print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
         createRewardedAd();
@@ -237,17 +237,17 @@ class _MovieDetailedScrState extends State<MovieDetailedScr> {
                                   serverSelectDialog(
                                       context: context,
                                       movie: widget.movie,
-                                      openMovie: (String selectedServer) {
+                                      openMovie: (String selectedServer) async {
                                         if (!Platform.isWindows) {
-                                          showRewardedAd(afterReward: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      VideoPlayerScr(
-                                                          selectedServer)),
-                                            );
-                                          });
+                                          showRewardedAd(afterReward: () {});
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    VideoPlayerScr(
+                                                        selectedServer)),
+                                          );
                                         } else {
                                           Navigator.push(
                                             context,

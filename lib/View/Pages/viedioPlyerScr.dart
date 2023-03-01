@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:fullscreen/fullscreen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../ViewModel/admobAdsManger.dart';
@@ -76,9 +77,16 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
   @override
   void initState() {
     // TODO: implement initState
-    createInterstitialAd();
-    super.initState();
-    adLoop();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]).then((value) {
+      FullScreen.enterFullScreen(FullScreenMode.EMERSIVE_STICKY);
+      super.initState();
+      createInterstitialAd();
+      adLoop();
+    });
   }
 
   @override
@@ -86,44 +94,37 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
     // TODO: implement dispose
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-    ]);
-    super.dispose();
+      DeviceOrientation.portraitDown,
+    ]).then((value) {
+      FullScreen.exitFullScreen();
+      super.dispose();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: RotatedBox(
-            quarterTurns: 0,
-            child: InAppWebView(
-              androidOnPermissionRequest: (InAppWebViewController controller,
-                  String origin, List<String> resources) async {
-                return PermissionRequestResponse(
-                    resources: resources,
-                    action: PermissionRequestResponseAction.GRANT);
-              },
-              initialUrlRequest: URLRequest(url: Uri.parse(widget.videoUrl)),
-              onWebViewCreated: (controller) {
-                webViewController = controller;
-                SystemChrome.setPreferredOrientations([
-                  DeviceOrientation.landscapeLeft,
-                ]);
-              },
-              initialOptions: InAppWebViewGroupOptions(
-                crossPlatform: InAppWebViewOptions(
-                  useShouldOverrideUrlLoading: true,
-                  mediaPlaybackRequiresUserGesture: false,
-                ),
-              ),
-              shouldOverrideUrlLoading: (controller, navigationAction) async {
-                return NavigationActionPolicy.CANCEL;
-              },
-            ),
-          ),
+    return InAppWebView(
+      androidOnPermissionRequest: (InAppWebViewController controller,
+          String origin, List<String> resources) async {
+        return PermissionRequestResponse(
+            resources: resources,
+            action: PermissionRequestResponseAction.GRANT);
+      },
+      initialUrlRequest: URLRequest(url: Uri.parse(widget.videoUrl)),
+      onWebViewCreated: (controller) {
+        webViewController = controller;
+      },
+      initialOptions: InAppWebViewGroupOptions(
+        crossPlatform: InAppWebViewOptions(
+          clearCache: true,
+          cacheEnabled: true,
+          useShouldOverrideUrlLoading: true,
+          mediaPlaybackRequiresUserGesture: false,
         ),
       ),
+      shouldOverrideUrlLoading: (controller, navigationAction) async {
+        return NavigationActionPolicy.CANCEL;
+      },
     );
   }
 }

@@ -99,7 +99,7 @@ class HomeCubit extends Cubit<HomeState> {
   static Map<String, MovieModel> favoriteMovies = HashMap();
   static List<String> favoriteMoviesNames = [];
 
-  getFavoriteMoviesFromDB() {
+  getFavoriteMoviesFromDB() async {
     SQLHelper.getFavoritesMovies().then((value) {
       value.forEach((element) {
         if (favoriteMovies.containsKey(element['name']) != true) {
@@ -111,7 +111,7 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  FavoriteMoviestoDB(MovieModel movie) {
+  FavoriteMoviestoDB(MovieModel movie) async {
     if (favoriteMovies.containsKey(movie.name) != true) {
       SQLHelper.db();
       SQLHelper.addMovieToFavorites(
@@ -134,7 +134,7 @@ class HomeCubit extends Cubit<HomeState> {
   static Map<String, SeriesModel> favoriteSeries = HashMap();
   static List<String> favoriteSeriesNames = [];
 
-  getFavoriteSeriesFromDB() {
+  getFavoriteSeriesFromDB() async {
     SQLHelper.getFavoritesSeries().then((value) {
       value.forEach((element) {
         if (favoriteSeries.containsKey(element['name']) != true) {
@@ -147,7 +147,7 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  FavoriteSeriestoDB(SeriesModel series) {
+  FavoriteSeriestoDB(SeriesModel series) async {
     if (favoriteSeries.containsKey(series.name) != true) {
       SQLHelper.db();
 
@@ -175,7 +175,7 @@ class HomeCubit extends Cubit<HomeState> {
   static List<MovieModel> arabicMoviesList = [];
   static List<MovieModel> mostWatchedMovies = [];
 
-  static getEnglishMovies() {
+  static getEnglishMovies() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -199,7 +199,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  static getArabicMovies() {
+  static getArabicMovies() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -223,7 +223,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  static getMostWatchedMovies() {
+  static getMostWatchedMovies() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -248,7 +248,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Map<String, Map<String, dynamic>> moviesMap = {};
-  uploadMoviesMap() {
+  uploadMoviesMap() async {
     FirebaseFirestore.instance
         .collection('movies')
         .doc('Arabic Movies')
@@ -261,7 +261,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   static List<SeriesModel> englishSeriesList = [];
-  static getEnglishSeries() {
+  static getEnglishSeries() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -290,7 +290,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   static List<SeriesModel> arabicSeriesList = [];
-  static getArabicSeries() {
+  static getArabicSeries() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -319,7 +319,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   static List<SeriesModel> ramadan2022SeriesList = [];
-  static getRamadan2022Series() {
+  static getRamadan2022Series() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -348,7 +348,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   static List<SeriesModel> ramadan2023SeriesList = [];
-  static getRamadan2023Series() {
+  static getRamadan2023Series() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('Series')
@@ -377,7 +377,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Map<String, Map<String, dynamic>> seriessMap = {};
-  uploadSeriesMap() {
+  uploadSeriesMap() async {
     FirebaseFirestore.instance
         .collection('Series')
         .doc('Ramadan 2022')

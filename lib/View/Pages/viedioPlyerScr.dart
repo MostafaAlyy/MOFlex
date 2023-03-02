@@ -62,7 +62,7 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
     _interstitialAd = null;
   }
 
-  adLoop() {
+  adLoop() async {
     Future.delayed(const Duration(minutes: 15), () {
       setState(() {
         if (_interstitialAd != null) {
@@ -113,6 +113,8 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
       initialUrlRequest: URLRequest(url: Uri.parse(widget.videoUrl)),
       onWebViewCreated: (controller) {
         webViewController = controller;
+        webViewController!
+            .loadUrl(urlRequest: URLRequest(url: Uri.parse(widget.videoUrl)));
       },
       initialOptions: InAppWebViewGroupOptions(
         crossPlatform: InAppWebViewOptions(
@@ -123,7 +125,12 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
         ),
       ),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
-        return NavigationActionPolicy.CANCEL;
+        if (navigationAction.request.url!.path ==
+            Uri.parse(widget.videoUrl).path) {
+          return NavigationActionPolicy.ALLOW;
+        } else {
+          return NavigationActionPolicy.CANCEL;
+        }
       },
     );
   }

@@ -43,11 +43,11 @@ class HomeCubit extends Cubit<HomeState> {
         searchListMovies.add(arabicMoviesList[i]);
       }
     }
-    for (int i = 0; i < mostWatchedMovies.length; i++) {
+    /* for (int i = 0; i < mostWatchedMovies.length; i++) {
       if (mostWatchedMovies[i].name!.toUpperCase().contains(s.toUpperCase())) {
         searchListMovies.add(mostWatchedMovies[i]);
       }
-    }
+    }*/
     emit(SearchState());
   }
 
@@ -173,7 +173,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   static List<MovieModel> moviesList = [];
   static List<MovieModel> arabicMoviesList = [];
-  static List<MovieModel> mostWatchedMovies = [];
+  // static List<MovieModel> mostWatchedMovies = [];
   static List<MovieModel> animationMovies = [];
 
   static getEnglishMovies() async {
@@ -224,7 +224,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  static getAnimationMovies() async {
+  static getMostWatchedMovies() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -232,7 +232,7 @@ class HomeCubit extends Cubit<HomeState> {
           .get()
           .then((value) {
         value.data()!.forEach((key, value) {
-          mostWatchedMovies.add(MovieModel.fromJson(value));
+          moviesList.add(MovieModel.fromJson(value));
         });
       }).catchError((onError) {});
     } else {
@@ -242,13 +242,13 @@ class HomeCubit extends Cubit<HomeState> {
           .get()
           .then((value) {
         value.map.forEach((key, value) {
-          mostWatchedMovies.add(MovieModel.fromJson(value));
+          moviesList.add(MovieModel.fromJson(value));
         });
       }).catchError((onError) {});
     }
   }
 
-  static getMostWatchedMovies() async {
+  static getAnimationMovies() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')

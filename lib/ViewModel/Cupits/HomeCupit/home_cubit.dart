@@ -174,6 +174,7 @@ class HomeCubit extends Cubit<HomeState> {
   static List<MovieModel> moviesList = [];
   static List<MovieModel> arabicMoviesList = [];
   static List<MovieModel> mostWatchedMovies = [];
+  static List<MovieModel> animationMovies = [];
 
   static getEnglishMovies() async {
     if (!Platform.isWindows) {
@@ -223,7 +224,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  static getMostWatchedMovies() async {
+  static getAnimationMovies() async {
     if (!Platform.isWindows) {
       FirebaseFirestore.instance
           .collection('movies')
@@ -247,11 +248,35 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  static getMostWatchedMovies() async {
+    if (!Platform.isWindows) {
+      FirebaseFirestore.instance
+          .collection('movies')
+          .doc('Animation Movies')
+          .get()
+          .then((value) {
+        value.data()!.forEach((key, value) {
+          animationMovies.add(MovieModel.fromJson(value));
+        });
+      }).catchError((onError) {});
+    } else {
+      Firestore.instance
+          .collection('movies')
+          .document('Animation Movies')
+          .get()
+          .then((value) {
+        value.map.forEach((key, value) {
+          animationMovies.add(MovieModel.fromJson(value));
+        });
+      }).catchError((onError) {});
+    }
+  }
+
   Map<String, Map<String, dynamic>> moviesMap = {};
   uploadMoviesMap() async {
     FirebaseFirestore.instance
         .collection('movies')
-        .doc('English Movies')
+        .doc('Animation Movies')
         .set(moviesMap)
         .then((value) {
       emit(UploadMoviesSuccessState());

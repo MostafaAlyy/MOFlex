@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Row(
+                      /*     Row(
                         children: [
                           Text(
                             "Most Watched Movies",
@@ -87,7 +87,7 @@ class Home extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 20,
-                      ),
+                      ),*/
                       Row(
                         children: [
                           Text(
@@ -181,6 +181,55 @@ class Home extends StatelessWidget {
                             itemCount: (HomeCubit.arabicMoviesList.length >= 10)
                                 ? 10
                                 : HomeCubit.arabicMoviesList.length),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Animation Movies",
+                            style: GoogleFonts.roboto(
+                                color: Colors.white, fontSize: 20),
+                          ),
+                          const Spacer(),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    Transitiont(
+                                        child: ShowAll(
+                                            HomeCubit.animationMovies,
+                                            "Animation Movies",
+                                            cupit),
+                                        transitionEffect:
+                                            TransitionEffect.SCALE));
+                              },
+                              child: const Text(
+                                "Show All ",
+                                style: TextStyle(fontSize: 16),
+                              ))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 5.2,
+                        child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: ((context, index) => movieCard(
+                                context: context,
+                                imgLink: HomeCubit.animationMovies[index].img!,
+                                model: HomeCubit.animationMovies[index])),
+                            separatorBuilder: ((context, index) =>
+                                const SizedBox(
+                                  width: 10,
+                                )),
+                            itemCount: (HomeCubit.animationMovies.length >= 10)
+                                ? 10
+                                : HomeCubit.animationMovies.length),
                       ),
                       const SizedBox(
                         height: 20,

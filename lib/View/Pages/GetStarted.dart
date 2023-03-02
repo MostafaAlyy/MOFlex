@@ -27,6 +27,7 @@ class GetStart extends StatelessWidget {
             HomeCubit.getEnglishSeries();
             HomeCubit.getArabicSeries();
             HomeCubit.getMostWatchedMovies();
+            HomeCubit.getAnimationMovies();
             Navigator.pop(context);
             Fluttertoast.showToast(
                 msg: "Register Success",
@@ -52,6 +53,7 @@ class GetStart extends StatelessWidget {
             HomeCubit.getRamadan2023Series();
             HomeCubit.getEnglishSeries();
             HomeCubit.getArabicSeries();
+            HomeCubit.getAnimationMovies();
             HomeCubit.getMostWatchedMovies();
             CashHelper.SaveData(key: 'uId', value: state.uId);
             Fluttertoast.showToast(

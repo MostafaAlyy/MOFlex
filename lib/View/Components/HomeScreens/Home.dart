@@ -315,7 +315,7 @@ class Home extends StatelessWidget {
                         height: 15,
                       ),
                       SizedBox(
-                        height: 160,
+                        height: MediaQuery.of(context).size.height / 5.2,
                         child: ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,

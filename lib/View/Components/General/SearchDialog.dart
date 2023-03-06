@@ -135,6 +135,7 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                     width:
                                         MediaQuery.of(context).size.width / 1.1,
                                     child: ListView.separated(
+                                        shrinkWrap: true,
                                         itemBuilder: (context, index) {
                                           return movieSearchCard(
                                               context: context,
@@ -143,7 +144,7 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                         },
                                         separatorBuilder: (context, index) {
                                           return const SizedBox(
-                                            height: 15,
+                                            height: 10,
                                           );
                                         },
                                         itemCount:
@@ -156,6 +157,7 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                     width:
                                         MediaQuery.of(context).size.width / 1.1,
                                     child: ListView.separated(
+                                        shrinkWrap: true,
                                         itemBuilder: (context, index) {
                                           return seriesSearchCard(
                                               context: context,
@@ -164,12 +166,12 @@ Future searchDialog({required BuildContext context, required var cupit}) {
                                         },
                                         separatorBuilder: (context, index) {
                                           return const SizedBox(
-                                            height: 15,
+                                            height: 10,
                                           );
                                         },
                                         itemCount:
                                             HomeCubit.searchListSeries.length),
-                                  )
+                                  ),
                               ],
                             )),
                       ),

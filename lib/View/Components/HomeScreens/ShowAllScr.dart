@@ -91,9 +91,9 @@ class _ShowAllState extends State<ShowAll> {
                           child: AdWidget(ad: banner!)),
                     SizedBox(
                       width: double.infinity,
-                      height: ((cupit.showAllLoadedCard / 3) *
-                              (MediaQuery.of(context).size.height / 5.2)) +
-                          (MediaQuery.of(context).size.height / 3),
+                      height: ((cupit.showAllLoadedCard / 2.4) *
+                              (MediaQuery.of(context).size.height / 5)) +
+                          (MediaQuery.of(context).size.height / 2),
                       child: DynamicHeightGridView(
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: cupit.showAllLoadedCard,

@@ -405,7 +405,7 @@ class HomeCubit extends Cubit<HomeState> {
   uploadSeriesMap() async {
     FirebaseFirestore.instance
         .collection('Series')
-        .doc('Ramadan 2022')
+        .doc('Arabic Series')
         .set(seriessMap)
         .then((value) {
       emit(UploadMoviesSuccessState());

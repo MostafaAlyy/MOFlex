@@ -138,6 +138,7 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> links = widget.Series.links!.keys.toList();
     return BlocProvider(
       create: (context) => HomeCubit(),
       child: BlocConsumer<HomeCubit, HomeState>(
@@ -231,8 +232,7 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                VideoPlayerScr(widget
-                                                    .Series.links!["1"]!)),
+                                                VideoPlayerScr(links[0])),
                                       );
                                     } else {
                                       Navigator.push(
@@ -240,7 +240,7 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 DesktopWebView(widget
-                                                    .Series.links!["1"]!)),
+                                                    .Series.links![links[0]]!)),
                                       );
                                     }
                                   },
@@ -297,9 +297,8 @@ class _SeriesDetailedScrState extends State<SeriesDetailedScr> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => VideoPlayerScr(
-                                          widget
-                                              .Series.links!["${index + 1}"]!)),
+                                      builder: (context) =>
+                                          VideoPlayerScr(links[index])),
                                 );
                               },
                               Series: widget.Series,

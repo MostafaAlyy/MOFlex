@@ -77,7 +77,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   int currentPage = 0, focusedIndex = 0;
 
-  List<Widget> screens = [Home(), Favorite(), Movies(), Series()];
+  List<Widget> screens = [
+    const Home(),
+    Favorite(),
+    const Movies(),
+    const Series()
+  ];
 
   void changePage(int index) {
     currentPage = index;

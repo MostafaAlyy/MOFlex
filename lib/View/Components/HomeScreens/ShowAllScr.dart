@@ -14,7 +14,7 @@ class ShowAll extends StatefulWidget {
   List<MovieModel> movies;
   String title;
   var cupit;
-  ShowAll(this.movies, this.title, this.cupit);
+  ShowAll(this.movies, this.title, this.cupit, {super.key});
   @override
   State<ShowAll> createState() => _ShowAllState(movies, title);
 }
@@ -81,7 +81,7 @@ class _ShowAllState extends State<ShowAll> {
                 child: Column(
                   children: [
                     mAppBar(cupit, context),
-                    Text("${title}",
+                    Text(title,
                         style: GoogleFonts.bitter(
                             color: Colors.white, fontSize: 48)),
                     if (banner != null)

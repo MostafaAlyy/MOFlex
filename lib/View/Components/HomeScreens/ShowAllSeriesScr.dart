@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:moshahda_app/Models/MovieModel.dart';
 import 'package:moshahda_app/Models/SeriesModel.dart';
-import 'package:moshahda_app/View/Components/General/MovieCard.dart';
 
 import '../../../ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import '../../../ViewModel/admobAdsManger.dart';
@@ -16,7 +14,7 @@ class ShowAllSeries extends StatefulWidget {
   List<SeriesModel> movies;
   String title;
   var cupit;
-  ShowAllSeries(this.movies, this.title, this.cupit);
+  ShowAllSeries(this.movies, this.title, this.cupit, {super.key});
   @override
   State<ShowAllSeries> createState() => _ShowAllSeriesState(movies, title);
 }

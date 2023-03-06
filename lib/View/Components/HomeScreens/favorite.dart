@@ -11,6 +11,8 @@ import '../../../ViewModel/admobAdsManger.dart';
 import '../General/appBar.dart';
 
 class Favorite extends StatefulWidget {
+  const Favorite({super.key});
+
   @override
   State<Favorite> createState() => _FavoriteState();
 }

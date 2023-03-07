@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class NotFoundScr extends StatelessWidget {
   const NotFoundScr({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(),
       body: Center(
-        child: Text("Trailer Not Available Now"),
+        child: Text(
+          "Trailer Not Available Now",
+          style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.08,
+              fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

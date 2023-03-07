@@ -10,7 +10,6 @@ import 'package:moshahda_app/View/Pages/GetStarted.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'View/Pages/HomePage.dart';
-import 'View/Pages/uploadScr.dart';
 import 'ViewModel/Cupits/HomeCupit/home_cubit.dart';
 import 'ViewModel/Database/local/sharedPreferns.dart';
 import 'firebase_options.dart';

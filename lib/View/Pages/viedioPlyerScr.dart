@@ -8,7 +8,7 @@ import '../../ViewModel/admobAdsManger.dart';
 
 class VideoPlayerScr extends StatefulWidget {
   String videoUrl;
-  VideoPlayerScr(this.videoUrl);
+  VideoPlayerScr(this.videoUrl, {super.key});
 
   @override
   State<VideoPlayerScr> createState() => _VideoPlayerScrState();

@@ -103,6 +103,7 @@ class _VideoPlayerScrState extends State<VideoPlayerScr> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     return InAppWebView(
       androidOnPermissionRequest: (InAppWebViewController controller,
           String origin, List<String> resources) async {
